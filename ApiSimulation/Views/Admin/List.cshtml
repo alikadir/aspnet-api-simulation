@@ -1,0 +1,212 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+
+    <!-- #region Jquery -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- #endregion -->
+    <!--#region Fontawesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+    <!-- #endregion -->
+    <!--#region Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- #endregion -->
+    <!-- #region KnockoutJS -->
+    <script src="~/Scripts/knockout-2.2.1.js"></script>
+    <script src="~/Scripts/knockout.viewmodel.2.0.3.min.js"></script>
+    <!-- #endregion -->
+    <!-- #region Scripts -->
+    <script src="~/Scripts/Common/GlobalVariables.js"></script>
+    <script src="~/Scripts/Common/Helpers.js"></script>
+    <script src="~/Scripts/Models/Header.js"></script>
+    <script src="~/Scripts/Models/Response.js"></script>
+    <script src="~/Scripts/Models/ResponseDetail.js"></script>
+    <script src="~/Scripts/View/Admin.js"></script>
+    <!-- #endregion -->
+
+
+    <script>
+/*
+            $(function ()
+            {
+                //$('[data-toggle="tooltip"]').tooltip();
+                //$('[data-toggle="dropdown"]').dropdown();
+
+                // ilk adım modeli observeble hale getirdik.
+                viewModel = ko.viewmodel.fromModel(sendingData);
+                ko.applyBindings(viewmModel);
+
+                setTimeout(function ()
+                {
+                    // observeble model üzerinde kayıt değiştirdik
+                    viewModel()[2].url("deneme url text");
+
+                    // observeble olan viewmodel deki son değişiklikleri sendingModel üzerine aldık.
+                    sendingModel = ko.viewmodel.toModel(viewModel)
+
+
+                    // observeble olmayan dataya dışarıdan yeni bişeyler ekleyip
+                    sendingData[1].detail.push(
+                                                  {
+                                                      id: 11,
+                                                      contentType: "xxx/yyy",
+                                                      contentRaw: "xxxxx",
+                                                      hit: 2323
+                                                  });
+                    // bu değişikliği bunu observeble modelimize aktardık.
+                    ko.viewmodel.updateFromModel(viewModel, sendingData);
+
+
+                }, 3000);
+
+
+
+
+
+            });
+
+            var viewmModel;
+
+            var sendingData = [
+                    {
+                        id: 1,
+                        url: "http://aaaaa",
+                        delay: 300,
+                        hit: 123,
+                        detail:
+                              [
+                                {
+                                    id: 3,
+                                    contentType: "aa1/aa1",
+                                    contentRaw: "aaaaa1",
+                                    hit: 543
+                                },
+                                {
+                                    id: 5,
+                                    contentType: "aa2/aa2",
+                                    contentRaw: "aaaaa2",
+                                    hit: 543
+                                }
+                              ]
+                    },
+                    {
+                        id: 2,
+                        url: "http://bbbb",
+                        delay: 200,
+                        hit: 234,
+                        detail:
+                              [
+                                {
+                                    id: 9,
+                                    contentType: "bb/bb",
+                                    contentRaw: "bbbbbb",
+                                    hit: 432
+                                }
+                              ]
+                    },
+                    {
+                        id: 3,
+                        url: "http://ccccc",
+                        delay: 100,
+                        hit: 345,
+                        detail: []
+                    }
+            ];
+*/
+    </script>
+
+    <!-- #region template -->
+
+    <script type="text/html" id="response-template">
+
+
+        <div class="panel panel-success" data-bind="attr: { 'data-id': ID }">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-8">
+                        <strong>Url: </strong><span data-bind="text: Url"></span><input type="text" data-bind="value:Url" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <strong>Hit: </strong><span data-bind="text: Hit"></span>
+                    </div>
+                    <div class="col-sm-2 text-right">
+
+                        <button class="btn btn-warning btn-xs" type="button" data-toggle="tooltip" title="Detayı göster" data-bind="attr:{'onclick':'ResponseDetailShowClick('+ID()+')'}">
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+
+
+                        <button class="btn btn-info btn-xs" type="button" data-toggle="tooltip" title="Düzenle">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+
+                        <button class="btn btn-danger btn-xs" type="button" data-toggle="dropdown" title="Sil">
+                            <i class="fa fa-close"></i>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#"><i class="fa fa-close"></i> İçeriği Sil</a></li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body" data-bind="visible: Detail().length > 0, template:{name:'response-detail-template', foreach:Detail}"></div>
+        </div>
+
+
+    </script>
+
+
+    <!--//////////////////////////////-->
+
+    <script type="text/html" id="response-detail-template">
+        <div>
+            <div class="row">
+                <div class="col-sm-2"><strong>Hit: </strong><span data-bind="text: Hit"></span></div>
+                <div class="col-sm-2"><strong>Delay: </strong><span data-bind="text: Delay"></span></div>
+                <div class="col-md-8"><strong>Content Type: </strong><span data-bind="text: ContentType"></span></div>
+                <div class="col-lg-12">
+                    <pre data-bind="text: ContentRaw"></pre>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+
+    <!-- #endregion -->
+
+
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Api Simulator</h1>
+            <p>Uygulama yaşam döngüsü içerisinde sunucu katmanında bulunan servisler tarafından gerçekleştirecek operasyonları simüle etmek için oluşturulmuştur.</p>
+            <p>
+                <button class="btn btn-warning btn-lg" role="button">
+                    <i class="fa fa-plus-square-o"></i>
+                    Yeni Operasyon Ekle
+                </button>
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="page-header">
+            <h1>Operasyonlar <small>Tüm operasyonlar ve detayları</small></h1>
+        </div>
+        <div data-bind="template: { name: 'response-template', foreach: ViewModelObservable }"></div>
+    </div>
+</body>
+</html>

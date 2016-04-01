@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ApiSimulationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tResponse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Hit" Type="smallint" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tResponseDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResponseID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContentRaw" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Delay" Type="int" Nullable="false" />
+          <Property Name="Hit" Type="smallint" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tResponseDetail_tResponse">
+          <End Role="tResponse" Type="Self.tResponse" Multiplicity="1" />
+          <End Role="tResponseDetail" Type="Self.tResponseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tResponse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tResponseDetail">
+              <PropertyRef Name="ResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ApiSimulationModelStoreContainer">
+          <EntitySet Name="tResponse" EntityType="Self.tResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tResponseDetail" EntityType="Self.tResponseDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tResponseDetail_tResponse" Association="Self.FK_tResponseDetail_tResponse">
+            <End Role="tResponse" EntitySet="tResponse" />
+            <End Role="tResponseDetail" EntitySet="tResponseDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ApiSimulationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ApiSimulationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tResponses" EntityType="ApiSimulationModel.tResponse" />
+          <EntitySet Name="tResponseDetails" EntityType="ApiSimulationModel.tResponseDetail" />
+          <AssociationSet Name="FK_tResponseDetail_tResponse" Association="ApiSimulationModel.FK_tResponseDetail_tResponse">
+            <End Role="tResponse" EntitySet="tResponses" />
+            <End Role="tResponseDetail" EntitySet="tResponseDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tResponse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hit" Type="Int16" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tResponseDetails" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponse" ToRole="tResponseDetail" />
+        </EntityType>
+        <EntityType Name="tResponseDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResponseID" Type="Int32" Nullable="false" />
+          <Property Name="ContentType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContentRaw" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Delay" Type="Int32" Nullable="false" />
+          <Property Name="Hit" Type="Int16" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tResponse" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponseDetail" ToRole="tResponse" />
+        </EntityType>
+        <Association Name="FK_tResponseDetail_tResponse">
+          <End Type="ApiSimulationModel.tResponse" Role="tResponse" Multiplicity="1" />
+          <End Type="ApiSimulationModel.tResponseDetail" Role="tResponseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tResponse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tResponseDetail">
+              <PropertyRef Name="ResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ApiSimulationModelStoreContainer" CdmEntityContainer="ApiSimulationEntities">
+          <EntitySetMapping Name="tResponses">
+            <EntityTypeMapping TypeName="ApiSimulationModel.tResponse">
+              <MappingFragment StoreEntitySet="tResponse">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Hit" ColumnName="Hit" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tResponseDetails">
+            <EntityTypeMapping TypeName="ApiSimulationModel.tResponseDetail">
+              <MappingFragment StoreEntitySet="tResponseDetail">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Hit" ColumnName="Hit" />
+                <ScalarProperty Name="Delay" ColumnName="Delay" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ContentRaw" ColumnName="ContentRaw" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
