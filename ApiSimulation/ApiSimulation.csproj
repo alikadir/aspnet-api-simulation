@@ -133,6 +133,7 @@
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
       <LastGenOutput>ApiSimulation.cs</LastGenOutput>
     </Content>
+    <Content Include="DB\Backup.bak" />
     <None Include="Scripts\jquery-2.2.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.2.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />
@@ -204,12 +205,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Common\Extensions.ts" />
     <TypeScriptCompile Include="Scripts\Common\GlobalVariables.ts" />
     <TypeScriptCompile Include="Scripts\Common\Helpers.ts" />
-    <TypeScriptCompile Include="Scripts\Models\IBase.ts" />
-    <TypeScriptCompile Include="Scripts\Models\Header.ts" />
-    <TypeScriptCompile Include="Scripts\Models\Response.ts" />
-    <TypeScriptCompile Include="Scripts\Models\ResponseDetail.ts" />
+    <TypeScriptCompile Include="Scripts\Models\IOperations.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\ApiSimulator.d..ts" />
     <TypeScriptCompile Include="Scripts\Typings\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.d.ts" />
