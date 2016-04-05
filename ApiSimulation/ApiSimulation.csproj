@@ -191,6 +191,7 @@
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Admin\List.cshtml" />
+    <Content Include="DB\Backup.bak" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
