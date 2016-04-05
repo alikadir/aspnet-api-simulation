@@ -213,7 +213,7 @@
     <TypeScriptCompile Include="Scripts\Models\Response.ts" />
     <TypeScriptCompile Include="Scripts\Models\ResponseDetail.ts" />
     <TypeScriptCompile Include="Scripts\Models\ViewModel.ts" />
-    <TypeScriptCompile Include="Scripts\Typings\ApiSimulator.d..ts" />
+    <TypeScriptCompile Include="Scripts\Typings\ApiSimulator.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.d.ts" />
