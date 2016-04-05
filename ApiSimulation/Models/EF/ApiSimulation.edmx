@@ -13,6 +13,7 @@
           <Property Name="Url" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="Hit" Type="smallint" Nullable="false" />
+          <Property Name="LastRequestDate" Type="datetime" Nullable="false" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tResponseDetail">
@@ -68,6 +69,7 @@
           <Property Name="Url" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hit" Type="Int16" Nullable="false" />
+          <Property Name="LastRequestDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tResponseDetails" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponse" ToRole="tResponseDetail" />
         </EntityType>
@@ -107,6 +109,7 @@
             <EntityTypeMapping TypeName="ApiSimulationModel.tResponse">
               <MappingFragment StoreEntitySet="tResponse">
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="LastRequestDate" ColumnName="LastRequestDate" />
                 <ScalarProperty Name="Hit" ColumnName="Hit" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Url" ColumnName="Url" />

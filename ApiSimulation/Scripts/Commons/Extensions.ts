@@ -1,5 +1,4 @@
-﻿
-ko.extenders.required = (target: any, overrideMessage: string): any =>
+﻿ko.extenders.required = (target: any, overrideMessage: string): any =>
 {
     target.hasError = ko.observable();
     target.validationMessage = ko.observable();

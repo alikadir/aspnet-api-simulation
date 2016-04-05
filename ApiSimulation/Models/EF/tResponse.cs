@@ -24,6 +24,7 @@ namespace ApiSimulation.Models.EF
         public string Url { get; set; }
         public System.DateTime CreateDate { get; set; }
         public short Hit { get; set; }
+        public System.DateTime LastRequestDate { get; set; }
         public bool IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

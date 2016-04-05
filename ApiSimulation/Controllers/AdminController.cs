@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ApiSimulation.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController :  ControllerBase
     {
         // GET: Admin
         public ActionResult List()

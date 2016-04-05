@@ -1,47 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ApiSimulation.Controllers
 {
-    public class OperationController : Controller
+    public class OperationController : ControllerBase
     {
         // GET: Operation
         public JsonResult GetResponseList()
         {
-            var result = new List<Models.DTO.Response>();
-
-
-            using (var db = new Models.EF.ApiSimulationEntities())
-            {
-                var responseList = db.tResponses.Where(x => !x.IsDelete).OrderByDescending(x => x.CreateDate).ToList();
-                result.AddRange(MapperConfig.Mapper.Map<List<Models.DTO.Response>>(responseList));
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(new Businesses.OperationBusiness().GetResponseList(), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetResponseDetailListByParentID(int responseId)
+        public JsonResult GetResponseDetailListByParentID(int parentId)
         {
-            var result = new List<Models.DTO.ResponseDetail>();
-
-            using (var db = new Models.EF.ApiSimulationEntities())
-            {
-                var responseDetailList = db.tResponseDetails.Where(x => !x.IsDelete && x.ResponseID == responseId).OrderByDescending(x => x.CreateDate).ToList();
-                result.AddRange(MapperConfig.Mapper.Map<List<Models.DTO.ResponseDetail>>(responseDetailList));
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(new Businesses.OperationBusiness().GetResponseDetailListByParentID(parentId), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DynamicResponse()
         {
+            var response = new Businesses.OperationBusiness().GetResponseContent(Constants.UrlConstant.ApiDynamicUrl);
 
-            return Content("dynamic - " + HttpContext.Request.Url.ToString());
+            if (response == null)
+                return HttpNotFound();
+            else if (response.ContentRaw.StartsWith("base64,"))
+                return File(Convert.FromBase64String(response.ContentRaw.Replace("base64,", "")), response.ContentType);
+            else
+                return Content(response.ContentRaw, response.ContentType);
+
         }
-
-
+        
     }
 }

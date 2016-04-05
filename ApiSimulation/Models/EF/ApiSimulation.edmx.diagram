@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="43c624350699458e824dac426d208dca" Name="Diagram1">
-        <EntityTypeShape EntityType="ApiSimulationModel.tResponse" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tResponse" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="ApiSimulationModel.tResponseDetail" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="ApiSimulationModel.FK_tResponseDetail_tResponse" />
       </Diagram>

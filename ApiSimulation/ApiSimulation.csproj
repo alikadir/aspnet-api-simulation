@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="gruntfile.js" />
     <Content Include="Models\EF\ApiSimulation.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
@@ -133,26 +134,29 @@
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
       <LastGenOutput>ApiSimulation.cs</LastGenOutput>
     </Content>
-    <Content Include="DB\Backup.bak" />
-    <None Include="Scripts\jquery-2.2.2.intellisense.js" />
-    <Content Include="Scripts\jquery-2.2.2.js" />
-    <Content Include="Scripts\jquery-2.2.2.min.js" />
-    <Content Include="Scripts\knockout-2.2.1.debug.js" />
-    <Content Include="Scripts\knockout-2.2.1.js" />
-    <Content Include="Scripts\knockout.viewmodel.2.0.3.js" />
-    <Content Include="Scripts\knockout.viewmodel.2.0.3.min.js" />
+    <Content Include="package.json" />
+    <Content Include="Scripts\Lib\bootstrap.js" />
+    <Content Include="Scripts\Lib\jquery-2.2.2.js" />
+    <Content Include="Scripts\Lib\knockout-2.2.1.js" />
+    <Content Include="Scripts\Lib\knockout.mapping-latest.js" />
+    <Content Include="Scripts\Lib\knockout.viewmodel.2.0.3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\MapperConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Businesses\BusinessBase.cs" />
+    <Compile Include="Businesses\OperationBusiness.cs" />
+    <Compile Include="Constants\UrlConstant.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DTO\Response.cs" />
     <Compile Include="Models\DTO\ResponseDetail.cs" />
+    <Compile Include="Models\DTO\ResponseDetailBasic.cs" />
     <Compile Include="Models\EF\ApiSimulation.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,7 +191,6 @@
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Admin\List.cshtml" />
-    <Content Include="Scripts\jquery-2.2.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,25 +199,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Constants\" />
-    <Folder Include="Views\Operation\" />
+    <Folder Include="Scripts\Dist\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Common\Extensions.ts" />
-    <TypeScriptCompile Include="Scripts\Common\GlobalVariables.ts" />
-    <TypeScriptCompile Include="Scripts\Common\Helpers.ts" />
-    <TypeScriptCompile Include="Scripts\Models\IOperations.ts" />
+    <TypeScriptCompile Include="Scripts\Commons\Extensions.ts" />
+    <TypeScriptCompile Include="Scripts\Commons\GlobalVariables.ts" />
+    <TypeScriptCompile Include="Scripts\Commons\Helpers.ts" />
+    <TypeScriptCompile Include="Scripts\Models\IViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Response.ts" />
+    <TypeScriptCompile Include="Scripts\Models\ResponseDetail.ts" />
+    <TypeScriptCompile Include="Scripts\Models\ViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Typings\ApiSimulator.d..ts" />
     <TypeScriptCompile Include="Scripts\Typings\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\knockout.mapping.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.viewmodel.d.ts" />
-    <TypeScriptCompile Include="Scripts\View\Admin.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Admin.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

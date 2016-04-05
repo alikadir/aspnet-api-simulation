@@ -9,27 +9,18 @@
     <meta name="viewport" content="width=device-width" />
     <title>List</title>
 
-    <!-- #region Jquery -->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- #endregion -->
+  
     <!--#region Fontawesome -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <!-- #endregion -->
     <!--#region Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">    
     <!-- #endregion -->
-    <!-- #region KnockoutJS -->
-    <script src="~/Scripts/knockout-2.2.1.js"></script>
-    <script src="~/Scripts/knockout.viewmodel.2.0.3.min.js"></script>
+    <!-- #region External -->
+    <script src="~/Scripts/Dist/external.js"></script>
     <!-- #endregion -->
-    <!-- #region Scripts -->
-    <script src="~/Scripts/Common/GlobalVariables.js"></script>
-    <script src="~/Scripts/Common/Helpers.js"></script>
-    <script src="~/Scripts/Models/Header.js"></script>
-    <script src="~/Scripts/Models/Response.js"></script>
-    <script src="~/Scripts/Models/ResponseDetail.js"></script>
-    <script src="~/Scripts/View/Admin.js"></script>
+    <!-- #region Internal -->
+    <script src="~/Scripts/Dist/internal.js"></script>
     <!-- #endregion -->
 
 
@@ -140,7 +131,7 @@
                     </div>
                     <div class="col-sm-2 text-right">
 
-                        <button class="btn btn-warning btn-xs" type="button" data-toggle="tooltip" title="Detayı göster" data-bind="attr:{'onclick':'ResponseDetailShowClick('+ID()+')'}">
+                        <button class="btn btn-warning btn-xs" type="button" data-toggle="tooltip" title="Detayı göster">
                             <i class="fa fa-caret-down"></i>
                         </button>
 
@@ -161,7 +152,7 @@
                 </div>
             </div>
 
-            <div class="panel-body" data-bind="visible: Detail().length > 0, template:{name:'response-detail-template', foreach:Detail}"></div>
+            <div class="panel-body" data-bind="visible: Items().length > 0, template:{name:'response-detail-template', foreach:Items}"></div>
         </div>
 
 
@@ -206,7 +197,7 @@
         <div class="page-header">
             <h1>Operasyonlar <small>Tüm operasyonlar ve detayları</small></h1>
         </div>
-        <div data-bind="template: { name: 'response-template', foreach: ViewModelObservable }"></div>
+        <div data-bind="template: { name: 'response-template', foreach: Items }"></div>
     </div>
 </body>
 </html>
