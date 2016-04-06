@@ -3,11 +3,29 @@
 
     AddNew = (): void =>
     {
-        this.Items.push(new Response());
+        this.Items.unshift(new Response());
     }
     Delete = (item: Response): void =>
     {
         this.Items.remove(item);
+    }
+    Edit = (item: Response): void =>
+    {
+        item.IsEditing(true);
+    }
+    Save = (item: Response): void =>
+    {
+        // server send
+        let self = item;
+        self.InProgress(true);
+        setTimeout(() => { self.InProgress(false); }, 2000);
+
+
+        item.IsEditing(false);
+    }
+    Cancel = (item: Response): void =>
+    {
+        item.IsEditing(false);
     }
     Load = (): void =>
     {
@@ -31,18 +49,38 @@
 
     AddNewDetail = (parent: Response): void =>
     {
-        parent.Items.push(new ResponseDetail());
+        this.LoadDetail(parent);
+        parent.Items.unshift(new ResponseDetail());
     }
     DeleteDetail = (parent: Response, item: ResponseDetail): void =>
     {
         parent.Items.remove(item);
     }
+    EditDetail = (item: ResponseDetail): void =>
+    {
+        item.IsEditing(true);
+    }
+    SaveDetail = (item: ResponseDetail): void =>
+    {
+        // server send
+        let self = item;
+        self.InProgress(true);
+        setTimeout(() => { self.InProgress(false); }, 2000);
+
+
+        item.IsEditing(false);
+    }
+    CancelDetail = (item: ResponseDetail): void =>
+    {
+        item.IsEditing(false);
+    }
     LoadDetail = (parent: Response): void =>
     {
         let self = parent;
+        self.InProgress(true);
         $.getJSON("/Operation/GetResponseDetailListByParentID", { parentId: parent.ID }, (data) =>
         {
-            self.Items = ko.observableArray([]);
+            self.Items.removeAll();
 
             let items: Array<ResponseDetail> = data;
 
@@ -54,9 +92,12 @@
                 });
             }
 
+            self.InProgress(false);
+
         });
     }
 
     Items: KnockoutObservableArray<Response> = ko.observableArray([]);
+
 
 }

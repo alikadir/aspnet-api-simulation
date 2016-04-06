@@ -12,6 +12,7 @@
             this.Hit(item.Hit);
             this.CreateDate(item.CreateDate);
             this.ResponseID(item.Response);
+            this.IsEditing(false);
 
         }
     }
@@ -24,8 +25,6 @@
     CreateDate: KnockoutObservable<Date> = ko.observable(new Date());
     ResponseID: KnockoutObservable<number> = ko.observable(0);
 
-
-
-
-
+    IsEditing: KnockoutObservable<boolean> = ko.observable(true);
+    InProgress: KnockoutObservable<boolean> = ko.observable(false);
 }
