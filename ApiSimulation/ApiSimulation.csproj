@@ -122,6 +122,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Lib\knockout.validation.js" />
+    <Content Include="Scripts\Lib\moment.js" />
+    <Content Include="Styles\Common\Common.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Styles\Bootstrap\bootstrap.min.css" />
+    <Content Include="Styles\Dist\external.css" />
+    <Content Include="Styles\Dist\internal.css" />
+    <Content Include="Styles\FontAwesome\font-awesome.min.css" />
     <Content Include="Global.asax" />
     <Content Include="gruntfile.js" />
     <Content Include="Models\EF\ApiSimulation.Context.tt">
@@ -135,11 +143,14 @@
       <LastGenOutput>ApiSimulation.cs</LastGenOutput>
     </Content>
     <Content Include="package.json" />
+    <Content Include="Scripts\Dist\external.js" />
+    <Content Include="Scripts\Dist\internal.js" />
     <Content Include="Scripts\Lib\bootstrap.js" />
     <Content Include="Scripts\Lib\jquery-2.2.2.js" />
     <Content Include="Scripts\Lib\knockout-2.2.1.js" />
     <Content Include="Scripts\Lib\knockout.mapping-latest.js" />
     <Content Include="Scripts\Lib\knockout.viewmodel.2.0.3.js" />
+    <Content Include="Styles\fonts\fontawesome-webfont.svg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +203,12 @@
     </Content>
     <Content Include="Views\Admin\List.cshtml" />
     <Content Include="DB\Backup.bak" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Styles\fonts\fontawesome-webfont.eot" />
+    <Content Include="Styles\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Styles\fonts\fontawesome-webfont.woff" />
+    <Content Include="Styles\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Styles\fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -199,16 +216,14 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Dist\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Commons\Extensions.ts" />
-    <TypeScriptCompile Include="Scripts\Commons\GlobalVariables.ts" />
+    <TypeScriptCompile Include="Scripts\Commons\Constants.ts" />
     <TypeScriptCompile Include="Scripts\Commons\Helpers.ts" />
     <TypeScriptCompile Include="Scripts\Models\IViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Models\Response.ts" />
@@ -219,6 +234,7 @@
     <TypeScriptCompile Include="Scripts\Typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.mapping.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\knockout.validation.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.viewmodel.d.ts" />
     <TypeScriptCompile Include="Scripts\Views\Admin.ts" />
   </ItemGroup>

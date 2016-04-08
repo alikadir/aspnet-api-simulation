@@ -47,6 +47,19 @@ namespace ApiSimulation.Businesses
 
         }
 
+        public Models.DTO.Response GetResponseByID(int id)
+        {
+            Models.DTO.Response result = null;
+
+            using (var db = new Models.EF.ApiSimulationEntities())
+            {
+                var response = db.tResponses.FirstOrDefault(x => !x.IsDelete && x.ID == id);
+                result = MapperConfig.Mapper.Map<Models.DTO.Response>(response);
+            }
+
+            return result;
+        }
+
         public List<Models.DTO.Response> GetResponseList()
         {
             var result = new List<Models.DTO.Response>();

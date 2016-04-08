@@ -16,6 +16,11 @@ namespace ApiSimulation.Controllers
             return Json(new Businesses.OperationBusiness().GetResponseList(), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetResponseByID(int id)
+        {
+            return Json(new Businesses.OperationBusiness().GetResponseByID(id), JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetResponseDetailListByParentID(int parentId)
         {
             return Json(new Businesses.OperationBusiness().GetResponseDetailListByParentID(parentId), JsonRequestBehavior.AllowGet);
@@ -33,6 +38,6 @@ namespace ApiSimulation.Controllers
                 return Content(response.ContentRaw, response.ContentType);
 
         }
-        
+
     }
 }

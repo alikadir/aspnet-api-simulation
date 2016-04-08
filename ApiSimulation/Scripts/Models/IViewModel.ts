@@ -1,5 +1,6 @@
 ﻿interface IViewModel
 {
+    InProgress: KnockoutObservable<boolean>;
 
     AddNew: () => void;
     Delete: (item: Response) => void;
@@ -13,7 +14,12 @@
     EditDetail: (item: ResponseDetail) => void;
     SaveDetail: (item: ResponseDetail) => void;
     CancelDetail: (item: ResponseDetail) => void;
-    LoadDetail: (parent: Response) => void;
+    LoadDetail: (parent: Response, callBack?: () => void) => void;
 
-    Items: KnockoutObservableArray<Response>
+    SelectFile: (item: ResponseDetail, file: any) => void;
+
+    IsValid: (item: Response, showMessage?: boolean) => boolean;
+    IsValidDetail: (item: ResponseDetail, showMessage?: boolean) => boolean;
+
+    Items: KnockoutObservableArray<Response>;
 }

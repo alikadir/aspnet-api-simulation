@@ -9,9 +9,9 @@ namespace ApiSimulation.Models.DTO
     {
         public int ID { get; set; }
         public string Url { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         public short Hit { get; set; }
-           
+        public DateTime LastRequestDate { get; set; }
 
     }
 }
