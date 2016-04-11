@@ -1,4 +1,6 @@
-﻿/// <binding BeforeBuild='concat' ProjectOpened='watch' />
+﻿/// <reference path="C:\ApiSimulation\ApiSimulation\Scripts/Lib/jquery-2.2.2.js" />
+/// <reference path="C:\ApiSimulation\ApiSimulation\Scripts/Lib/jquery-2.2.2.js" />
+/// <binding BeforeBuild='concat' ProjectOpened='watch' />
 /*
 This file in the main entry point for defining grunt tasks and using grunt plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkID=513275&clcid=0x409
@@ -11,12 +13,12 @@ module.exports = function (grunt)
         concat: {
 
             externalScript: {
-                src: ['Scripts/Lib/jquery-2.2.2.js', 'Scripts/Lib/bootstrap.js', 'Scripts/Lib/knockout-2.2.1.js', 'Scripts/Lib/knockout.viewmodel.2.0.3.js', 'Scripts/Lib/moment.js', 'Scripts/Lib/knockout.validation.js'],
+                src: ['Scripts/Lib/jquery*.js', 'Scripts/Lib/*.js'],
                 dest: 'Scripts/Dist/external.js',
             },
 
-            internalScript: {
-                src: ['Scripts/Commons/Extensions.js', 'Scripts/Commons/Helpers.js', 'Scripts/Commons/Constants.js', 'Scripts/Models/*.js', 'Scripts/Views/Admin.js'],
+            internalScript: { // high priority file *Base.js  =>  src: ['lib/before.js', 'lib/*', 'lib/after.js'] 
+                src: ['Scripts/Commons/**/*.js','Scripts/Models/**/*Base.js', 'Scripts/Models/**/*.js', 'Scripts/Views/*.js'],
                 dest: 'Scripts/Dist/internal.js',
             },
 

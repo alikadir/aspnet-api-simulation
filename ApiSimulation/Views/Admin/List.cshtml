@@ -33,7 +33,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>Url: </strong><span data-bind="text: Url"></span>
+                            <strong>Url: </strong><a href="" target="_blank" data-bind="text:UrlDisplay , attr:{href:UrlDisplay}"></a>
                         </div>
                         <div class="col-md-3">
                             <strong>Last: </strong><span data-bind="text: moment(LastRequestDate).format('DD.MM.YYYY HH:mm:ss')"></span>
@@ -49,7 +49,7 @@
                                 <i class="fa fa-plus"></i>
                             </button>
 
-                            <button class="btn btn-warning btn-xs" type="button" data-toggle="tooltip" title="Detayı göster" data-bind="click: $parent.LoadDetail, visible: Items().length == 0">
+                            <button class="btn btn-warning btn-xs" type="button" data-toggle="tooltip" title="Detayı göster" data-bind="click: $parent.LoadDetails, visible: Items().length == 0">
                                 <i class="fa fa-cloud-download"></i>
                             </button>
 
@@ -85,9 +85,9 @@
                                 <i class="fa fa-check"></i>
                             </button>
 
-                            @*<button class="btn btn-danger btn-xs" type="button" data-toggle="tooltip" title="İptal" data-bind="click: $parent.Cancel">
+                            <button class="btn btn-danger btn-xs" type="button" data-toggle="tooltip" title="İptal" data-bind="click: $parent.Cancel">
                                 <i class="fa fa-close"></i>
-                            </button>*@
+                            </button>
 
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                             <i class="fa fa-close"></i>
                         </button>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="about:blank" data-bind="click: $root.DeleteDetail"><i class="fa fa-close"></i> İçeriği Sil</a></li>
+                            <li><a href="about:blank" data-bind="event: { click: function() { $root.DeleteDetail($parent,$data) } }"><i class="fa fa-close"></i> İçeriği Sil</a></li>
                         </ul>
 
 
@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3"><div class="form-group"><label>Delay: </label><input class="form-control input-sm" data-bind="value: Delay" type="number" required /></div></div>
-                <div class="col-md-4"><div class="form-group"><label>Content Type: </label><select class="form-control input-sm" data-bind="options: ContentTypeConstant.AllowedContentTypes, value: ContentType, optionsCaption:'Seçiniz...'" required></select></div></div>
+                <div class="col-md-4"><div class="form-group"><label>Content Type: </label><select class="form-control input-sm" data-bind="options: Commons.Constants.ContentTypeConstant.AllowedContentTypes, value: ContentType, optionsCaption:'Seçiniz...'" required></select></div></div>
                 <div class="col-md-3"><div class="form-group"><label>Base64 Converter: </label><input class="form-control" type="file" accept="image/*,application/pdf" data-bind="event: { change: function() { viewModel.SelectFile($data, $element.files[0]) } }" /></div></div>
                 <div class="col-sm-2 text-right">
                     <div class="form-group">
@@ -157,9 +157,9 @@
                             <i class="fa fa-check"></i>
                         </button>
 
-                        @*<button class="btn btn-danger btn-xs" type="button" data-toggle="tooltip" title="İptal" data-bind="click: $root.CancelDetail">
+                        <button class="btn btn-danger btn-xs" type="button" data-toggle="tooltip" title="İptal" data-bind="event: { click: function() { $root.CancelDetail($parent,$data) } }">
                             <i class="fa fa-close"></i>
-                        </button>*@
+                        </button>
                     </div>
                 </div>
 
