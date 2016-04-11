@@ -2,3 +2,8 @@
 {
     resize: vertical;
 }
+
+body
+{
+    padding-bottom: 500px;
+}
