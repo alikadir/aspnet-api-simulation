@@ -37,13 +37,13 @@
             if (self.ContentRaw() == null || self.ContentRaw().length == 0)
             {
                 if (showMessage)
-                    alert("ContentRaw is required!");
+                    $.toaster({ message: 'Content Raw boş geçilemez!', title: 'Uyarı', priority: 'info' });
                 return false;
             }
             else if (self.ContentType() == null || self.ContentType().length == 0)
             {
                 if (showMessage)
-                    alert("ContentType is required!");
+                    $.toaster({ message: 'Content Type boş geçilemez!', title: 'Uyarı', priority: 'info' });
                 return false;
             }
             else

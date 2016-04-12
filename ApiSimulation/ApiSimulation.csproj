@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\Dist\external.js" />
+    <Content Include="Scripts\Lib\jquery.toaster.js" />
     <Content Include="Scripts\Lib\knockout.validation.js" />
     <Content Include="Scripts\Lib\moment.js" />
     <Content Include="Styles\Common\Common.css" />
@@ -238,6 +239,7 @@
     <TypeScriptCompile Include="Scripts\Typings\ApiSimulator.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\jquery.toaster.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.mapping.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout.validation.d.ts" />

@@ -9,7 +9,7 @@ namespace ApiSimulation.Businesses
     {
         public OperationBusiness() : base()
         {
-           // System.Threading.Thread.Sleep(1500);
+            // System.Threading.Thread.Sleep(1500);
         }
 
         #region Response
@@ -70,12 +70,19 @@ namespace ApiSimulation.Businesses
 
                 if (response.ID == 0) // create  
                 {
+                    if (db.tResponses.Any(x => !x.IsDelete && x.Url == responseEF.Url))
+                        return 0;
+
                     responseEF.CreateDate = DateTime.Now;
                     db.tResponses.Add(responseEF);
                 }
                 else // update                
-                    db.Entry(responseEF).State = System.Data.Entity.EntityState.Modified;
+                {
+                    if (db.tResponses.Any(x => !x.IsDelete && x.Url == responseEF.Url && x.ID != responseEF.ID))
+                        return 0;
 
+                    db.Entry(responseEF).State = System.Data.Entity.EntityState.Modified;
+                }
                 db.SaveChanges();
 
             }

@@ -44,7 +44,7 @@
             $.post("/Operation/SaveResponse", item, (data) =>
             {
                 if (data === 0)
-                    alert("Kaydedilemedi!");
+                    $.toaster({ message: 'Kaydedilemedi! Url kullanılıyor olabilir.', title: 'Hata', priority: 'danger' });
                 else
                 {
                     item.ID = data;
@@ -128,7 +128,7 @@
             $.post("/Operation/SaveResponseDetail", item, (data) =>
             {
                 if (data === 0)
-                    alert("Kaydedilemedi!");
+                    $.toaster({ message: 'Kaydedilemedi!', title: 'Hata', priority: 'danger' });
                 else
                 {
                     item.ID = data;

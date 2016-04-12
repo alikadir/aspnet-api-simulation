@@ -36,7 +36,7 @@ namespace Models.DTO
             else
             {
                 if (showMessage)
-                    alert("Url is required!");
+                    $.toaster({ message: 'Url boş geçilemez!', title: 'Uyarı', priority: 'info' });
                 return false;
             }
         }
