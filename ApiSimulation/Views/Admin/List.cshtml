@@ -177,7 +177,9 @@
     <div class="jumbotron">
         <div class="container">
             <h1>Api Simulator</h1>
-            <p>Uygulama yaşam döngüsü içerisinde sunucu katmanında bulunan servisler tarafından gerçekleştirecek operasyonları simüle etmek için oluşturulmuştur.</p>
+            <p>
+                Uygulama yaşam döngüsü içerisinde sunucu katmanında bulunan servisler tarafından gerçekleştirecek operasyonları simüle etmek için oluşturulmuştur.
+            </p>
             <p>
                 <button class="btn btn-warning btn-lg" role="button" id="btn-new-operation">
                     <i class="fa fa-plus-square-o"></i>
@@ -191,6 +193,57 @@
             <h1>Operasyonlar <small><span>Tüm operasyonlar ve detayları</span> <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i> </small></h1>
         </div>
         <div data-bind="template: { name: 'response-template', foreach: Items }"></div>
+
+        <div class="page-header">
+            <h1>Template Engine <small><span>Tüm detaylı işlemler</span></small></h1>
+        </div>
+        <p>
+            Template engine kullanarak temel programlama işlemlerini gerçekleştirebiliriz. Örneğin bir <code>for</code> döngüsü kurabilir veya <code>if</code> yapıları ile dönmesini istediğimiz datayı istediğimiz koşula göre biçimlendirebiliriz.
+            <h2>Temel</h2>
+            Template kodlarımız <code>@@</code> ile başlamalıdır, Kod bloklarımız oluşturmak için <code>@@{ }</code> kullanılır, Yorum satrı haline getirmek için <code>@@* benim yorumum *@@</code> kullanılır.<br />
+            Kod bloğundan çıkmak için <code>&lt;text&gt; template dışı kodlar &lt;/text&gt;</code> kullanılır.<br />
+            Gönderdiğimizi Http isteğinin tüm detaylarını barındıran <code>HttpContext</code> nesnesi <code>@@Model.</code> şeklinde kullanılabilir.
+        </p>
+
+
+
+        <h2>Örnek kodlar</h2>
+        <p>Şimdiki zaman bilgisi</p>
+<pre>
+{
+    "ChangeDate":"@@DateTime.Now.ToString("dd.MM.yyyy")"
+}
+</pre>
+
+        <p>Birden çok model oluşturmak</p>
+<pre>
+[
+   @@for(var i = 0; i < 10; i++)
+    {
+       &lt;text&gt;
+       { "SimpleProp":"value" } 
+       &lt;/text&gt;
+    }
+]
+</pre>
+
+        <p>Post edilen parametreleri kullanmak</p>
+<pre>
+{
+    "AllParameters":"@@Model.Request.Form",
+    "SpecificParameter":"@@Model.Request.Form["paramName"]"
+}
+</pre>
+
+        <p>Post edilen parametreye göre model şekillendirmek</p>
+<pre>
+@@if(Model.Request.Form["paramName"] != null)
+{
+    &lt;text&gt;
+    "VisibleParameter":"Value"
+    &lt;/text&gt;
+}
+</pre>
     </div>
 </body>
 </html>

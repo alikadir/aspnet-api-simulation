@@ -22,10 +22,6 @@ namespace ApiSimulation.Controllers
 
             return View(model);
         }
-
-        public ActionResult Detail()
-        {
-            return View();
-        }
+      
     }
 }

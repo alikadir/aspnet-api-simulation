@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RazorEngine;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace ApiSimulation.Controllers
 
             return new EmptyResult();
         }
+
+        [ValidateInput(false)]
         public ActionResult SaveResponse(Models.DTO.Response response)
         {
             int result = 0;
@@ -36,7 +39,7 @@ namespace ApiSimulation.Controllers
                 result = new Businesses.OperationBusiness().SaveResponse(response);
             }
 
-            return Json(result);
+            return Json(result, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -58,6 +61,8 @@ namespace ApiSimulation.Controllers
 
             return new EmptyResult();
         }
+
+        [ValidateInput(false)]
         public ActionResult SaveResponseDetail(Models.DTO.ResponseDetail responseDetail)
         {
             int result = 0;
@@ -67,12 +72,12 @@ namespace ApiSimulation.Controllers
                 result = new Businesses.OperationBusiness().SaveResponseDetail(responseDetail);
             }
 
-            return Json(result);
+            return Json(result, JsonRequestBehavior.AllowGet);
 
         }
 
         #endregion
-        
+
         #region Other
         public ActionResult DynamicResponse()
         {
@@ -83,7 +88,11 @@ namespace ApiSimulation.Controllers
             else if (response.ContentRaw.StartsWith("base64,"))
                 return File(Convert.FromBase64String(response.ContentRaw.Replace("base64,", "")), response.ContentType);
             else
-                return Content(response.ContentRaw, response.ContentType);
+            {
+                string result = Razor.Parse(response.ContentRaw, HttpContext);
+                return Content(result, response.ContentType);
+
+            }
 
         }
 
