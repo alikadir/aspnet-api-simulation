@@ -156,7 +156,7 @@
     <Content Include="Scripts\Lib\knockout-2.2.1.js" />
     <Content Include="Scripts\Lib\knockout.mapping-latest.js" />
     <Content Include="Scripts\Lib\knockout.viewmodel.2.0.3.js" />
-    <Content Include="Styles\fonts\fontawesome-webfont.svg" />
+    <Content Include="Styles\FontAwesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -213,11 +213,11 @@
     </Content>
     <Content Include="Views\Admin\List.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
-    <Content Include="Styles\fonts\fontawesome-webfont.eot" />
-    <Content Include="Styles\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Styles\fonts\fontawesome-webfont.woff" />
-    <Content Include="Styles\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Styles\fonts\FontAwesome.otf" />
+    <Content Include="Styles\FontAwesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Styles\FontAwesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Styles\FontAwesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Styles\FontAwesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Styles\FontAwesome\fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
