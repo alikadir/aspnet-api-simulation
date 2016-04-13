@@ -22,6 +22,7 @@ namespace ApiSimulation.Models.EF
     
         public int ID { get; set; }
         public string Url { get; set; }
+        public string Category { get; set; }
         public System.DateTime CreateDate { get; set; }
         public short Hit { get; set; }
         public System.DateTime LastRequestDate { get; set; }

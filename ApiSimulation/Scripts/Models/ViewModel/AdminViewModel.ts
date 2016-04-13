@@ -5,11 +5,14 @@
 
         constructor() { super(); }
 
-        InProgress: KnockoutObservable<boolean> = ko.observable(false);
+
+
 
         AddNew = (): void =>
         {
-            this.Items.unshift(new DTO.Response());
+            let item = new DTO.Response();
+            item.Category(this.SelectedCategory());
+            this.Items.unshift(item);
         }
         Delete = (item: DTO.Response, callBack?: () => void): void =>
         {
@@ -78,6 +81,9 @@
                         self.Items.push(new DTO.Response(item));
                     });
                 }
+
+                self.SelectedCategory(self.Categories()[0]);
+
                 self.InProgress(false);
             });
         }
@@ -239,7 +245,26 @@
         }
 
         Items: KnockoutObservableArray<DTO.Response> = ko.observableArray([]);
+        InProgress: KnockoutObservable<boolean> = ko.observable(false);
 
+        Categories: KnockoutComputed<Array<string>> = ko.computed(
+            {
+                owner: this,
+                read: () =>
+                {
+                    let returnList = [];
+
+                    this.Items().forEach((item) =>
+                    {
+                        if (returnList.indexOf(item.Category()) == -1)
+                            returnList.push(item.Category());
+                    });
+
+                    return returnList;
+                }
+            });
+
+        SelectedCategory: KnockoutObservable<string> = ko.observable("");
 
     }
 }

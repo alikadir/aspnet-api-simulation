@@ -5,5 +5,13 @@
 
 body
 {
-    padding-bottom: 500px;
+    padding-bottom: 300px;
+}
+
+footer
+{
+    padding-top: 15px;    
+    margin-top: 45px;    
+    color: #777;
+    border-top: 1px solid #e5e5e5;
 }

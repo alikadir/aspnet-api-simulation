@@ -24,8 +24,7 @@
     <!-- #region template -->
 
     <script type="text/html" id="response-template">
-
-
+     <div data-bind="if: Category() == $root.SelectedCategory() || Category() == '' ">
         <div class="panel panel-success" data-bind="attr: { 'data-id': ID }">
             <div class="panel-heading">
                 <div data-bind="if: !IsEditing()">
@@ -73,10 +72,12 @@
 
 
                     <div class="row">
-                        <div class="col-md-10">
-                            <div class="form-group"><label>Url: </label><input class="form-control input-sm" data-bind="value: Url" type="text" placeholder="endpoint giriniz.." required /></div>
+                        <div class="col-md-8">
+                            <div class="form-group"><label>Url: </label><input class="form-control input-sm" data-bind="value: Url" type="text" placeholder="EndPoint giriniz.." required /></div>
                         </div>
-
+                        <div class="col-md-2">
+                            <div class="form-group"><label>Category: </label><input class="form-control input-sm" data-bind="value: Category" type="text" placeholder="Kategori giriniz.." required /></div>
+                        </div>
                         <div class="col-sm-2 text-right">
 
                             <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i>
@@ -97,7 +98,7 @@
 
             <div class="panel-body" data-bind="visible: Items().length > 0, template:{name:'response-detail-template', foreach:Items}"></div>
         </div>
-
+</div>
 
     </script>
 
@@ -192,6 +193,14 @@
         <div class="page-header">
             <h1>Operasyonlar <small><span>Tüm operasyonlar ve detayları</span> <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i> </small></h1>
         </div>
+
+        <ul class="nav nav-tabs" data-bind="foreach:Categories">
+            <li role="presentation" class="deneme" data-bind="css: {'active': $data == $root.SelectedCategory() }">
+                <a href="about:blank" data-bind="text: $data, click: $root.SelectedCategory"></a>
+                </li>          
+        </ul>
+        <br />
+
         <div data-bind="template: { name: 'response-template', foreach: Items }"></div>
 
         <div class="page-header">
@@ -208,12 +217,6 @@
 
 
         <h2>Örnek kodlar</h2>
-        <p>Şimdiki zaman bilgisi</p>
-<pre>
-{
-    "ChangeDate":"@@DateTime.Now.ToString("dd.MM.yyyy")"
-}
-</pre>
 
         <p>Birden çok model oluşturmak</p>
 <pre>
@@ -227,14 +230,6 @@
 ]
 </pre>
 
-        <p>Post edilen parametreleri kullanmak</p>
-<pre>
-{
-    "AllParameters":"@@Model.Request.Form",
-    "SpecificParameter":"@@Model.Request.Form["paramName"]"
-}
-</pre>
-
         <p>Post edilen parametreye göre model şekillendirmek</p>
 <pre>
 @@if(Model.Request.Form["paramName"] != null)
@@ -244,6 +239,50 @@
     &lt;/text&gt;
 }
 </pre>
+
+        <p>Post parametreleri kullanmak</p>
+<pre>
+{
+    "AllParameters":"@@Model.Request.Form",
+    "SpecificParameter":"@@Model.Request.Form["paramName"]"
+}
+</pre>
+
+        <p>Get parametreleri kullanmak</p>
+<pre>
+{
+    "AllParameters":"@@Model.Request.QueryString",
+    "SpecificParameter":"@@Model.Request.QueryString["paramName"]"
+}
+</pre>
+
+        <p>Şimdiki zaman bilgisi</p>
+<pre>
+{
+    "ChangeDate":"@@DateTime.Now.ToString("dd.MM.yyyy")"
+}
+</pre>
+        <p>Alınabilecek temel bilgiler</p>
+<pre>
+{
+"UserAgent":"@@Model.Request.UserAgent",
+"IP":"@@Model.Request.UserHostAddress;",
+"Client":"@@Model.Request.Browser.Browser",
+"Platform":"@@Model.Request.Browser.Platform",
+"ClientVersion":"@@Model.Request.Browser.Version",
+"RequestMethod":"@@Model.Request.HttpMethod",
+}
+</pre>
+        <p>Rastgele metin üretmek <code>LoremIpsum(int minWords, int maxWords, int minSentences, int maxSentences)</code></p>
+<pre>
+{
+   "RandomText:"@@ApiSimulation.Helpers.LoremIpsumHelper.LoremIpsum(4,4,3,3)"
+}
+</pre>
+
+        <footer>
+            <p>© 2016 Piri Medya A.Ş.</p>
+        </footer>
     </div>
 </body>
 </html>

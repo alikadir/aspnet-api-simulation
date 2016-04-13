@@ -11,6 +11,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Url" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="Hit" Type="smallint" Nullable="false" />
           <Property Name="LastRequestDate" Type="datetime" Nullable="false" />
@@ -67,6 +68,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Url" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hit" Type="Int16" Nullable="false" />
           <Property Name="LastRequestDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -112,6 +114,7 @@
                 <ScalarProperty Name="LastRequestDate" ColumnName="LastRequestDate" />
                 <ScalarProperty Name="Hit" ColumnName="Hit" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

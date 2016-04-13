@@ -9921,7 +9921,7 @@ return jQuery;
 			'css'       :
 			{
 				'position' : 'fixed',
-				'bottom'      : '10px',
+				'bottom'   : '10px',
 				'right'    : '10px',
 				'width'    : '300px',
 				'zIndex'   : 50000

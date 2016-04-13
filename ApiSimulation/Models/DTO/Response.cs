@@ -11,7 +11,8 @@ namespace ApiSimulation.Models.DTO
         public int ID { get; set; }
         [Required]
         public string Url { get; set; }
-        
+        [Required]
+        public string Category { get; set; }
         public DateTime CreateDate { get; set; }
         public short Hit { get; set; }
         public DateTime LastRequestDate { get; set; }

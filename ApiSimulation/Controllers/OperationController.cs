@@ -1,11 +1,6 @@
 ﻿using RazorEngine;
+using RazorEngine.Templating;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ApiSimulation.Controllers
@@ -89,7 +84,16 @@ namespace ApiSimulation.Controllers
                 return File(Convert.FromBase64String(response.ContentRaw.Replace("base64,", "")), response.ContentType);
             else
             {
-                string result = Razor.Parse(response.ContentRaw, HttpContext);
+                string result;
+                try
+                {
+                                            
+                    result =  Razor.Parse(response.ContentRaw, HttpContext);
+                }
+                catch (Exception)
+                {
+                    result = response.ContentRaw;
+                }
                 return Content(result, response.ContentType);
 
             }

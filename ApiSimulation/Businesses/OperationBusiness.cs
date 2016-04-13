@@ -175,6 +175,9 @@ namespace ApiSimulation.Businesses
                 var response = db.tResponses.Where(x => !x.IsDelete && x.Url == url).SingleOrDefault();
 
                 if (response == null)
+                    response = db.tResponses.Where(x => !x.IsDelete && url.StartsWith(x.Url)).SingleOrDefault();
+
+                if (response == null)
                     return null;
 
                 var responseDetail = response.tResponseDetails.Where(x => !x.IsDelete).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
