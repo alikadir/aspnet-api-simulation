@@ -1,0 +1,151 @@
+﻿<!-- #region template -->
+
+<script type="text/html" id="response-template">
+    <div data-bind="if: Category() == $root.SelectedCategory() || Category() == '' || IsEditing()">
+        <div class="panel panel-success" data-bind="attr: { 'data-id': ID }">
+            <div class="panel-heading">
+                <div data-bind="if: !IsEditing()">
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Url: </strong><a href="" target="_blank" data-bind="text:UrlDisplay , attr:{href:UrlDisplay}"></a>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Last: </strong><span data-bind="text: moment(LastRequestDate).format('DD.MM.YYYY HH:mm:ss')"></span>
+                        </div>
+                        <div class="col-sm-1">
+                            <strong>Hit: </strong><span data-bind="text: Hit"></span>
+                        </div>
+                        <div class="col-sm-2 text-right">
+
+                            <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i>
+
+                            <button class="btn btn-primary btn-xs" type="button" data-toggle="tooltip" title="Detay ekle" data-bind="click: $parent.AddNewDetail">
+                                <i class="fa fa-plus"></i>
+                            </button>
+
+                            <button class="btn btn-warning btn-xs" type="button" data-toggle="tooltip" title="Detayı göster" data-bind="click: $parent.LoadDetails, visible: Items().length == 0">
+                                <i class="fa fa-cloud-download"></i>
+                            </button>
+
+                            <button class="btn btn-info btn-xs" type="button" data-toggle="tooltip" title="Düzenle" data-bind="click: $parent.Edit">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+
+                            <button class="btn btn-danger btn-xs" type="button" data-toggle="dropdown" title="Sil">
+                                <i class="fa fa-close"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0)" data-bind="click: $parent.Delete"><i class="fa fa-close"></i> İçeriği Sil</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div data-bind="if: IsEditing()">
+
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group"><label>Url: </label><input class="form-control input-sm" data-bind="value: Url" type="text" placeholder="EndPoint giriniz.. ör: sport/live-score" required /></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group"><label>Category: </label><input class="form-control input-sm" data-bind="value: Category" type="text" placeholder="Kategori giriniz.." required /></div>
+                        </div>
+                        <div class="col-sm-2 text-right">
+
+                            <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i>
+
+                            <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" title="Kaydet" data-bind="click: $parent.Save">
+                                <i class="fa fa-check"></i>
+                            </button>
+
+                            <button class="btn btn-danger btn-xs" type="button" data-toggle="tooltip" title="İptal" data-bind="click: $parent.Cancel">
+                                <i class="fa fa-close"></i>
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel-body" data-bind="visible: Items().length > 0, template:{name:'response-detail-template', foreach:Items}"></div>
+        </div>
+    </div>
+
+</script>
+
+
+@* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// *@
+
+
+<script type="text/html" id="response-detail-template">
+    <div data-bind="if: !IsEditing()">
+        <div class="row">
+            <div class="col-lg-12">
+                <pre data-bind="text: ContentRaw, click : { double: $root.EditDetail }"></pre>
+            </div>
+            <div class="col-sm-3"><strong>Delay: </strong><span data-bind="text: Delay"></span></div>
+            <div class="col-md-5"><strong>Content Type: </strong><span data-bind="text: ContentType"></span></div>
+            <div class="col-sm-3"><strong>Hit: </strong><span data-bind="text: Hit"></span></div>
+            <div class="col-md-1 text-right">
+
+                <div class="form-group">
+
+                    <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i>
+
+                    <button class="btn btn-info btn-xs" type="button" data-toggle="tooltip" title="Düzenle" data-bind="click: $root.EditDetail">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-danger btn-xs" type="button" data-toggle="dropdown" title="Sil">
+                        <i class="fa fa-close"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0)" data-bind="event: { click: function() { $root.DeleteDetail($parent,$data) } }"><i class="fa fa-close"></i> İçeriği Sil</a></li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <hr />
+    </div>
+    <div data-bind="if: IsEditing()">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <textarea class="form-control" data-bind="value: ContentRaw" rows="10" required placeholder="Content..."></textarea>
+                </div>
+            </div>
+            <div class="col-sm-3"><div class="form-group"><label>Delay: </label><input class="form-control input-sm" data-bind="value: Delay" type="number" required /></div></div>
+            <div class="col-md-4"><div class="form-group"><label>Content Type: </label><select class="form-control input-sm" data-bind="options: Commons.Constants.ContentTypeConstant.AllowedContentTypes, value: ContentType, optionsCaption:'Seçiniz...'" required></select></div></div>
+            <div class="col-md-3"><div class="form-group"><label>Base64 Converter: </label><input class="form-control" type="file" accept="image/*,application/pdf" data-bind="event: { change: function() { viewModel.SelectFile($data, $element.files[0]) } }" /></div></div>
+            <div class="col-sm-2 text-right">
+                <div class="form-group">
+
+                    <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i>
+
+                    <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" title="Kaydet" data-bind="click: $root.SaveDetail">
+                        <i class="fa fa-check"></i>
+                    </button>
+
+                    <button class="btn btn-danger btn-xs" type="button" data-toggle="tooltip" title="İptal" data-bind="event: { click: function() { $root.CancelDetail($parent,$data) } }">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+        <hr />
+    </div>
+</script>
+
+<!-- #endregion -->

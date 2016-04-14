@@ -5,9 +5,6 @@
 
         constructor() { super(); }
 
-
-
-
         AddNew = (): void =>
         {
             let item = new DTO.Response();
@@ -262,9 +259,33 @@
 
                     return returnList;
                 }
+
             });
 
-        SelectedCategory: KnockoutObservable<string> = ko.observable("");
+        
+        private _SelectedCategory: KnockoutObservable<string> = ko.observable("");
+
+        SelectedCategory: KnockoutComputed<string> = ko.computed(
+            {
+                owner: this,
+                read: () =>
+                {
+                    if (this.Categories().indexOf(this._SelectedCategory()) == -1)
+                    {
+                        let result = this.Categories()[0];
+                        this._SelectedCategory(result);
+                        return result;
+                    }
+                    else
+                        return this._SelectedCategory();
+                },
+                write: (value) =>
+                {
+                    this._SelectedCategory(value);
+                }
+
+            }, this);
+
 
     }
 }
