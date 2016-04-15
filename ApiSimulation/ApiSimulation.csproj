@@ -129,6 +129,7 @@
     <Content Include="favicon.png" />
     <Content Include="DB\DB.sql" />
     <Content Include="Scripts\Dist\external.js" />
+    <Content Include="Scripts\Dist\internal.js" />
     <Content Include="Scripts\Lib\jquery.toaster.js" />
     <Content Include="Scripts\Lib\knockout.validation.js" />
     <Content Include="Scripts\Lib\moment.js" />
@@ -151,7 +152,6 @@
       <LastGenOutput>ApiSimulation.cs</LastGenOutput>
     </Content>
     <Content Include="package.json" />
-    <Content Include="Scripts\Dist\internal.js" />
     <Content Include="Scripts\Lib\bootstrap.js" />
     <Content Include="Scripts\Lib\jquery-2.2.2.js" />
     <Content Include="Scripts\Lib\knockout-2.2.1.js" />
@@ -194,6 +194,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\tRequestLog.cs">
+      <DependentUpon>ApiSimulation.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\tResponse.cs">
       <DependentUpon>ApiSimulation.tt</DependentUpon>
     </Compile>
@@ -229,7 +232,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Scripts\Commons\Extensions\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -237,7 +242,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Commons\Constants\Base64Constant.ts" />
     <TypeScriptCompile Include="Scripts\Commons\Constants\ContentTypeConstant.ts" />
-    <TypeScriptCompile Include="Scripts\Commons\Extensions\KnockoutExtension.ts" />
+    <TypeScriptCompile Include="Scripts\Commons\Helpers\KnockoutExtension.ts" />
     <TypeScriptCompile Include="Scripts\Commons\Helpers\Base64Helper.ts" />
     <TypeScriptCompile Include="Scripts\Commons\Helpers\ObservebleHelper.ts" />
     <TypeScriptCompile Include="Scripts\Models\DTO\DTOBase.ts" />

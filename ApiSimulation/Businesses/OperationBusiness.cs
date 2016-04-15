@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -192,6 +193,21 @@ namespace ApiSimulation.Businesses
 
                 response.Hit++;
                 response.LastRequestDate = DateTime.Now;
+
+                #region 
+                HttpContext.Current.Request.InputStream.Position = 0;
+                var stream = new StreamReader(HttpContext.Current.Request.InputStream);
+
+                response.tRequestLogs.Add(new Models.EF.tRequestLog
+                {
+                    RequestDate = DateTime.Now,
+                    RequestIP = HttpContext.Current.Request.UserHostAddress,
+                    RequestUserAgent = HttpContext.Current.Request.UserAgent,
+                    RequestMethod = HttpContext.Current.Request.HttpMethod,
+                    RequestRaw = HttpUtility.UrlDecode(string.Format("{0}{1}{1}{2}", HttpContext.Current.Request.Headers.ToString(), Environment.NewLine, stream.ReadToEnd()))
+                });
+                #endregion
+
                 responseDetail.Hit++;
 
                 db.SaveChanges();

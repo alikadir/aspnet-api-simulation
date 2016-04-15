@@ -17,6 +17,7 @@ namespace ApiSimulation.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tResponse()
         {
+            this.tRequestLogs = new HashSet<tRequestLog>();
             this.tResponseDetails = new HashSet<tResponseDetail>();
         }
     
@@ -28,6 +29,8 @@ namespace ApiSimulation.Models.EF
         public System.DateTime LastRequestDate { get; set; }
         public bool IsDelete { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tRequestLog> tRequestLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tResponseDetail> tResponseDetails { get; set; }
     }

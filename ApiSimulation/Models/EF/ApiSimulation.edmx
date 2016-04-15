@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ApiSimulationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tRequestLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResponseID" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="RequestUserAgent" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="RequestIP" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="RequestMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequestRaw" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="tResponse">
           <Key>
             <PropertyRef Name="ID" />
@@ -30,6 +42,18 @@
           <Property Name="Hit" Type="smallint" Nullable="false" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tRequestLog_tResponse">
+          <End Role="tResponse" Type="Self.tResponse" Multiplicity="1" />
+          <End Role="tRequestLog" Type="Self.tRequestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tResponse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tRequestLog">
+              <PropertyRef Name="ResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tResponseDetail_tResponse">
           <End Role="tResponse" Type="Self.tResponse" Multiplicity="1" />
           <End Role="tResponseDetail" Type="Self.tResponseDetail" Multiplicity="*" />
@@ -43,8 +67,13 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ApiSimulationModelStoreContainer">
+          <EntitySet Name="tRequestLog" EntityType="Self.tRequestLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tResponse" EntityType="Self.tResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tResponseDetail" EntityType="Self.tResponseDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tRequestLog_tResponse" Association="Self.FK_tRequestLog_tResponse">
+            <End Role="tResponse" EntitySet="tResponse" />
+            <End Role="tRequestLog" EntitySet="tRequestLog" />
+          </AssociationSet>
           <AssociationSet Name="FK_tResponseDetail_tResponse" Association="Self.FK_tResponseDetail_tResponse">
             <End Role="tResponse" EntitySet="tResponse" />
             <End Role="tResponseDetail" EntitySet="tResponseDetail" />
@@ -55,13 +84,31 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ApiSimulationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ApiSimulationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tRequestLogs" EntityType="ApiSimulationModel.tRequestLog" />
           <EntitySet Name="tResponses" EntityType="ApiSimulationModel.tResponse" />
           <EntitySet Name="tResponseDetails" EntityType="ApiSimulationModel.tResponseDetail" />
+          <AssociationSet Name="FK_tRequestLog_tResponse" Association="ApiSimulationModel.FK_tRequestLog_tResponse">
+            <End Role="tResponse" EntitySet="tResponses" />
+            <End Role="tRequestLog" EntitySet="tRequestLogs" />
+          </AssociationSet>
           <AssociationSet Name="FK_tResponseDetail_tResponse" Association="ApiSimulationModel.FK_tResponseDetail_tResponse">
             <End Role="tResponse" EntitySet="tResponses" />
             <End Role="tResponseDetail" EntitySet="tResponseDetails" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tRequestLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResponseID" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RequestUserAgent" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RequestIP" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="RequestMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequestRaw" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tResponse" Relationship="ApiSimulationModel.FK_tRequestLog_tResponse" FromRole="tRequestLog" ToRole="tResponse" />
+        </EntityType>
         <EntityType Name="tResponse">
           <Key>
             <PropertyRef Name="ID" />
@@ -73,6 +120,7 @@
           <Property Name="Hit" Type="Int16" Nullable="false" />
           <Property Name="LastRequestDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tRequestLogs" Relationship="ApiSimulationModel.FK_tRequestLog_tResponse" FromRole="tResponse" ToRole="tRequestLog" />
           <NavigationProperty Name="tResponseDetails" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponse" ToRole="tResponseDetail" />
         </EntityType>
         <EntityType Name="tResponseDetail">
@@ -89,6 +137,18 @@
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tResponse" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponseDetail" ToRole="tResponse" />
         </EntityType>
+        <Association Name="FK_tRequestLog_tResponse">
+          <End Type="ApiSimulationModel.tResponse" Role="tResponse" Multiplicity="1" />
+          <End Type="ApiSimulationModel.tRequestLog" Role="tRequestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tResponse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tRequestLog">
+              <PropertyRef Name="ResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tResponseDetail_tResponse">
           <End Type="ApiSimulationModel.tResponse" Role="tResponse" Multiplicity="1" />
           <End Type="ApiSimulationModel.tResponseDetail" Role="tResponseDetail" Multiplicity="*" />
@@ -101,12 +161,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ApiSimulationModelStoreContainer" CdmEntityContainer="ApiSimulationEntities">
+          <EntitySetMapping Name="tRequestLogs">
+            <EntityTypeMapping TypeName="ApiSimulationModel.tRequestLog">
+              <MappingFragment StoreEntitySet="tRequestLog">
+                <ScalarProperty Name="RequestRaw" ColumnName="RequestRaw" />
+                <ScalarProperty Name="RequestMethod" ColumnName="RequestMethod" />
+                <ScalarProperty Name="RequestIP" ColumnName="RequestIP" />
+                <ScalarProperty Name="RequestUserAgent" ColumnName="RequestUserAgent" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tResponses">
             <EntityTypeMapping TypeName="ApiSimulationModel.tResponse">
               <MappingFragment StoreEntitySet="tResponse">

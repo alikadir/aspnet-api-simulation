@@ -25,6 +25,7 @@ namespace ApiSimulation.Models.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tRequestLog> tRequestLogs { get; set; }
         public virtual DbSet<tResponse> tResponses { get; set; }
         public virtual DbSet<tResponseDetail> tResponseDetails { get; set; }
     }

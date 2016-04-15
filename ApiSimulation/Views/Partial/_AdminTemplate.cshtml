@@ -3,7 +3,7 @@
 <script type="text/html" id="response-template">
     <div data-bind="if: Category() == $root.SelectedCategory() || Category() == '' || IsEditing()">
         <div class="panel panel-success" data-bind="attr: { 'data-id': ID }">
-            <div class="panel-heading">
+            <div class="panel-heading" data-bind="click : { double: $parent.Edit }">
                 <div data-bind="if: !IsEditing()">
 
 
