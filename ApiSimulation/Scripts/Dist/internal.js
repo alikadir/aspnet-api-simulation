@@ -469,6 +469,12 @@ var Models;
                         _this._SelectedCategory(value);
                     }
                 }, this);
+                this.ShowLogDetail = function (item) {
+                    $("#iframe-log-detail").attr("src", "/Admin/LogDetail?responseId=" + item.ID);
+                    $("#iframe-loading").show();
+                    $("#modal-log-detail .modal-title").html("<b>Log Detail - </b> <code>" + item.UrlDisplay() + "</code>");
+                    $("#modal-log-detail").modal('toggle');
+                };
             }
             return AdminViewModel;
         }(ViewModel.ViewModelBase));
@@ -481,5 +487,6 @@ $(function () {
     viewModel.Load();
     ko.applyBindings(viewModel);
     $("#btn-new-operation").click(function () { return viewModel.AddNew(); });
+    $("#iframe-log-detail").on("load", function () { $("#iframe-loading").hide(); });
 });
 //# sourceMappingURL=Admin.js.map

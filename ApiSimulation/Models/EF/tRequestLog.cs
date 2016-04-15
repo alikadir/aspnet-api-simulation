@@ -20,6 +20,7 @@ namespace ApiSimulation.Models.EF
         public string RequestUserAgent { get; set; }
         public string RequestIP { get; set; }
         public string RequestMethod { get; set; }
+        public string RequestHeader { get; set; }
         public string RequestRaw { get; set; }
     
         public virtual tResponse tResponse { get; set; }

@@ -204,7 +204,8 @@ namespace ApiSimulation.Businesses
                     RequestIP = HttpContext.Current.Request.UserHostAddress,
                     RequestUserAgent = HttpContext.Current.Request.UserAgent,
                     RequestMethod = HttpContext.Current.Request.HttpMethod,
-                    RequestRaw = HttpUtility.UrlDecode(string.Format("{0}{1}{1}{2}", HttpContext.Current.Request.Headers.ToString(), Environment.NewLine, stream.ReadToEnd()))
+                    RequestHeader = HttpUtility.UrlDecode(HttpContext.Current.Request.Headers.ToString()),
+                    RequestRaw = HttpUtility.UrlDecode(stream.ReadToEnd())
                 });
                 #endregion
 
@@ -216,7 +217,11 @@ namespace ApiSimulation.Businesses
 
             System.Threading.Thread.Sleep(delay);
 
-            return new Models.DTO.ResponseDetailBasic { ContentRaw = content, ContentType = contentType };
+            return new Models.DTO.ResponseDetailBasic
+            {
+                ContentRaw = content,
+                ContentType = contentType
+            };
 
         }
 

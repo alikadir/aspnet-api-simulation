@@ -7,5 +7,6 @@ $(function ()
     ko.applyBindings(viewModel);
 
     $("#btn-new-operation").click(() => viewModel.AddNew());
+    $("#iframe-log-detail").on("load", () => { $("#iframe-loading").hide(); });
 });
 

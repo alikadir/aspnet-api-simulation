@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ApiSimulation.Controllers
 {
-    public class AdminController :  ControllerBase
+    public class AdminController : ControllerBase
     {
         // GET: Admin
         public ActionResult List()
@@ -16,12 +16,27 @@ namespace ApiSimulation.Controllers
             using (var db = new Models.EF.ApiSimulationEntities())
             {
                 var result = db.tResponses.Where(x => !x.IsDelete).OrderByDescending(x => x.CreateDate).ToList();
-                
+
                 model = MapperConfig.Mapper.Map<List<Models.DTO.Response>>(result);
             }
 
             return View(model);
         }
-      
+        public ActionResult LogDetail(int responseId)
+        {
+
+            var model = new List<Models.DTO.RequestLog>();
+
+            using (var db = new Models.EF.ApiSimulationEntities())
+            {
+                var result = db.tRequestLogs.Where(x => x.ResponseID == responseId).OrderByDescending(x => x.RequestDate).ToList();
+
+                model = MapperConfig.Mapper.Map<List<Models.DTO.RequestLog>>(result);
+            }
+
+            return View(model);
+
+        }
+
     }
 }

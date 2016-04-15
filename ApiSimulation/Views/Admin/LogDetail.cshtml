@@ -1,0 +1,38 @@
+﻿@model System.Collections.Generic.List<ApiSimulation.Models.DTO.RequestLog>
+
+    <html>
+    <head>
+        <title>Request Log Detail</title>
+    </head>
+    <body style="font-family:Arial, Helvetica, sans-serif">
+        @if(Model.Count == 0)
+        {
+        <text>
+            Kayıt Bulunamadı.
+        </text>
+        }
+        else
+        {
+
+        foreach(var item in Model)
+        {
+        <text>
+            <div>
+
+                <p><strong>Request IP: </strong>@item.RequestIP</p>
+                <p><strong>Request Date: </strong>@item.RequestDate.ToString("dd.MM.yyyy HH:mm:ss")</p>
+                <p><strong>Request User Agent: </strong>@item.RequestUserAgent</p>
+                <p><strong>Request Method: </strong>@item.RequestMethod</p>
+                <p><strong>Request Header: </strong><br />@item.RequestHeader</p>
+                <p><strong>Request Raw: </strong><br />@item.RequestRaw</p>
+
+                <hr />
+            </div>
+
+        </text>
+        }
+
+
+        }
+    </body>
+</html>

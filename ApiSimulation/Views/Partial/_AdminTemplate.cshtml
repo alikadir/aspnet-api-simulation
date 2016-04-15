@@ -17,7 +17,7 @@
                         <div class="col-sm-1">
                             <strong>Hit: </strong><span data-bind="text: Hit"></span>
                         </div>
-                        <div class="col-sm-2 text-right">
+                        <div class="col-lg-2 text-right">
 
                             <i class="fa fa-refresh fa-spin" data-bind="visible: InProgress"></i>
 
@@ -27,6 +27,10 @@
 
                             <button class="btn btn-warning btn-xs" type="button" data-toggle="tooltip" title="Detayı göster" data-bind="click: $parent.LoadDetails, visible: Items().length == 0">
                                 <i class="fa fa-cloud-download"></i>
+                            </button>
+
+                            <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" title="Log göster" data-bind="click: $parent.ShowLogDetail">
+                                <i class="fa fa-search"></i>
                             </button>
 
                             <button class="btn btn-info btn-xs" type="button" data-toggle="tooltip" title="Düzenle" data-bind="click: $parent.Edit">
