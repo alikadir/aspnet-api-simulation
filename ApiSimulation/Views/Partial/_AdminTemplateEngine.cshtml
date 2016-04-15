@@ -6,9 +6,9 @@
     <p>
         Template engine kullanarak temel programlama işlemlerini gerçekleştirebiliriz. Örneğin bir <code>for</code> döngüsü kurabilir veya <code>if</code> yapıları ile dönmesini istediğimiz datayı istediğimiz koşula göre biçimlendirebiliriz.
         <h2>Temel</h2>
-        Template kodlarımız <code>@@</code> ile başlamalıdır, Kod bloklarımız oluşturmak için <code>@@{ }</code> kullanılır, Yorum satrı haline getirmek için <code>@@* benim yorumum *@@</code> kullanılır.<br />
+        Template kodlarınız <code>@@</code> ile başlamalıdır, Kod bloklarınız oluşturmak için <code>@@{ }</code> kullanılır, Yorum satrı haline getirmek için <code>@@* benim yorumum *@@</code> kullanılır.<br />
         Kod bloğundan çıkmak için <code>&lt;text&gt; template dışı kodlar &lt;/text&gt;</code> kullanılır.<br />
-        Gönderdiğimizi Http isteğinin tüm detaylarını barındıran <code>HttpContext</code> nesnesi <code>@@Model.</code> şeklinde kullanılabilir.
+        Gönderdiğiniz Http isteğinin tüm detaylarını barındıran <code>HttpContext</code> nesnesi <code>@@Model.</code> şeklinde kullanılabilir.
     </p>
 
 
@@ -62,12 +62,12 @@
     <p><strong>Alınabilecek temel bilgiler</strong></p>
 <pre>
 {
-"UserAgent":"@@Model.Request.UserAgent",
-"IP":"@@Model.Request.UserHostAddress;",
-"Client":"@@Model.Request.Browser.Browser",
-"Platform":"@@Model.Request.Browser.Platform",
-"ClientVersion":"@@Model.Request.Browser.Version",
-"RequestMethod":"@@Model.Request.HttpMethod",
+    "UserAgent":"@@Model.Request.UserAgent",
+    "IP":"@@Model.Request.UserHostAddress;",
+    "Client":"@@Model.Request.Browser.Browser",
+    "Platform":"@@Model.Request.Browser.Platform",
+    "ClientVersion":"@@Model.Request.Browser.Version",
+    "RequestMethod":"@@Model.Request.HttpMethod",
 }
 </pre>
     <p><strong>Rastgele metin üretmek</strong> <code>LoremIpsum(int minWords, int maxWords, int minSentences, int maxSentences)</code></p>
