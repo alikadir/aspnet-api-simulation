@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PostDataHelper.cs" />
     <Compile Include="Helpers\LoremIpsumHelper.cs" />
     <Compile Include="Models\DTO\RequestLog.cs" />
     <Compile Include="Models\DTO\Response.cs" />
@@ -225,7 +226,9 @@
     <Content Include="Styles\fonts\FontAwesome.otf" />
     <Content Include="Views\Partial\_AdminTemplate.cshtml" />
     <Content Include="Views\Partial\_AdminHowToUse.cshtml" />
-    <Content Include="Views\Partial\_AdminTemplateEngine.cshtml" />
+    <Content Include="Views\Partial\_AdminTemplateEngine.cshtml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Admin\LogDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

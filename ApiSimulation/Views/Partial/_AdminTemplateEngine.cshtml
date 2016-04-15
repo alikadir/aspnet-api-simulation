@@ -82,5 +82,19 @@
     Model.Response.StatusCode = 403;
 }
 </pre>
+    <p><strong>JsonPostConverter ile işlem yapmak</strong></p>
+<pre>
+@@{
+    var obj = ApiSimulation.Helpers.PostDataHelper.GetJson();
+}
 
+ArrayCount = @@obj.Length
+
+@@foreach(var item in obj)
+{
+  &lt;text&gt;
+    AppID =  @@item.AppID
+  &lt;/text&gt;
+}
+</pre>
 </section>
