@@ -1,4 +1,4 @@
-﻿namespace Commons.Extensions
+namespace Commons.Extensions
 {
 
 
@@ -7,7 +7,7 @@
         {
             var accessor = valueAccessor();
             var clicks = 0;
-            var timeout = 200;
+            var timeout = 500;
 
             $(element).click(function (event)
             {
