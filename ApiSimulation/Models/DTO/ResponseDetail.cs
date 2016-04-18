@@ -16,5 +16,6 @@ namespace ApiSimulation.Models.DTO
         [Required]
         public int Delay { get; set; }
         public short Hit { get; set; }
+        public bool UseTemplateEngine { get; set; }
     }
 }

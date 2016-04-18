@@ -239,12 +239,14 @@ var Models;
                 this.Hit = 0;
                 this.CreateDate = moment().format();
                 this.ResponseID = 0;
+                this.UseTemplateEngine = ko.observable(true);
                 if (item != null) {
                     this.ID = item.ID;
                     this.Delay(item.Delay);
                     this.ContentRaw(item.ContentRaw);
                     this.ContentType(item.ContentType);
                     this.Hit = item.Hit;
+                    this.UseTemplateEngine(item.UseTemplateEngine);
                     this.CreateDate = item.CreateDate;
                     this.ResponseID = item.ResponseID;
                     this.IsEditing(false);

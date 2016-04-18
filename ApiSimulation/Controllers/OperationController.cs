@@ -85,14 +85,12 @@ namespace ApiSimulation.Controllers
             else
             {
                 string result;
-                //try
-                //{                                            
-                    result =  Razor.Parse(response.ContentRaw, HttpContext);
-                //}
-                //catch (Exception)
-                //{
-                //    result = response.ContentRaw;
-                //}
+
+                if (response.UseTemplateEngine)
+                    result = Razor.Parse(response.ContentRaw, HttpContext);
+                else
+                    result = response.ContentRaw;
+
                 return Content(result, response.ContentType);
 
             }

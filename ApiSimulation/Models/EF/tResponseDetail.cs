@@ -21,6 +21,7 @@ namespace ApiSimulation.Models.EF
         public System.DateTime CreateDate { get; set; }
         public int Delay { get; set; }
         public short Hit { get; set; }
+        public bool UseTemplateEngine { get; set; }
         public bool IsDelete { get; set; }
     
         public virtual tResponse tResponse { get; set; }

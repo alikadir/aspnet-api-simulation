@@ -169,6 +169,7 @@ namespace ApiSimulation.Businesses
 
             var content = string.Empty;
             var contentType = string.Empty;
+            var useTemplateEngine = false;
             var delay = 0;
 
             using (var db = new Models.EF.ApiSimulationEntities())
@@ -189,6 +190,7 @@ namespace ApiSimulation.Businesses
 
                 content = responseDetail.ContentRaw;
                 contentType = responseDetail.ContentType;
+                useTemplateEngine = responseDetail.UseTemplateEngine;
                 delay = responseDetail.Delay;
 
                 response.Hit++;
@@ -220,7 +222,9 @@ namespace ApiSimulation.Businesses
             return new Models.DTO.ResponseDetailBasic
             {
                 ContentRaw = content,
-                ContentType = contentType
+                ContentType = contentType,
+                UseTemplateEngine = useTemplateEngine
+
             };
 
         }

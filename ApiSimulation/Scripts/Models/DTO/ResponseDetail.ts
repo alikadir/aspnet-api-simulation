@@ -14,6 +14,7 @@
                 this.ContentRaw(item.ContentRaw);
                 this.ContentType(item.ContentType);
                 this.Hit = item.Hit;
+                this.UseTemplateEngine(item.UseTemplateEngine);
                 this.CreateDate = item.CreateDate;
                 this.ResponseID = item.ResponseID;
                 this.IsEditing(false);
@@ -28,6 +29,7 @@
         Hit: number = 0;
         CreateDate: any = moment().format();
         ResponseID: number = 0;
+        UseTemplateEngine: KnockoutObservable<boolean> = ko.observable(true);
 
         IsValid(showMessage: boolean)
         {

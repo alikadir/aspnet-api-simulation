@@ -41,6 +41,7 @@
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="Delay" Type="int" Nullable="false" />
           <Property Name="Hit" Type="smallint" Nullable="false" />
+          <Property Name="UseTemplateEngine" Type="bit" Nullable="false" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_tRequestLog_tResponse">
@@ -136,6 +137,7 @@
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Delay" Type="Int32" Nullable="false" />
           <Property Name="Hit" Type="Int16" Nullable="false" />
+          <Property Name="UseTemplateEngine" Type="Boolean" Nullable="false" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tResponse" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponseDetail" ToRole="tResponse" />
         </EntityType>
@@ -200,6 +202,7 @@
             <EntityTypeMapping TypeName="ApiSimulationModel.tResponseDetail">
               <MappingFragment StoreEntitySet="tResponseDetail">
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UseTemplateEngine" ColumnName="UseTemplateEngine" />
                 <ScalarProperty Name="Hit" ColumnName="Hit" />
                 <ScalarProperty Name="Delay" ColumnName="Delay" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />

@@ -9,5 +9,7 @@ namespace ApiSimulation.Models.DTO
     {
         public string ContentRaw { get; set; }
         public string ContentType { get; set; }
+
+        public bool UseTemplateEngine { get; set; }
     }
 }

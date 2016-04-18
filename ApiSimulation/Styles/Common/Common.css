@@ -21,6 +21,15 @@ footer
     height: 25px;
 }
 
+.red-bg
+{
+   background-color:#F19494;
+}
+.green-bg
+{
+   background-color:#A2F194;
+}
+
 #iframe-log-detail
 {
     width: 100%;
