@@ -96,5 +96,24 @@ ArrayCount = @@obj.Length
     AppID =  @@item.AppID
   &lt;/text&gt;
 }
+</pre>  
+  <p><strong>Model validation</strong></p>
+<pre>
+@@{
+   var obj = ApiSimulation.Helpers.PostDataHelper.GetJson();
+   Model.Response.StatusCode = 200; // Successful
+}
+
+@@foreach(var item in obj)
+{
+  if(string.IsNullOrEmpty(item.AppID) ||
+     string.IsNullOrEmpty(item.LogText)  ||
+     string.IsNullOrEmpty(item.Type) ||
+     string.IsNullOrEmpty(item.TimeStamp))
+  {
+     Model.Response.StatusCode = 412; // Precondition failed
+     break;
+  }
+}
 </pre>
 </section>

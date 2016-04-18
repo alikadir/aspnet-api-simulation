@@ -35,7 +35,7 @@ var Commons;
             init: function (element, valueAccessor, allBindingsAccessor, viewModel, context) {
                 var accessor = valueAccessor();
                 var clicks = 0;
-                var timeout = 200;
+                var timeout = 500;
                 $(element).click(function (event) {
                     if (typeof (accessor) === 'object') {
                         var single = accessor.single;
@@ -44,7 +44,6 @@ var Commons;
                         if (clicks === 1) {
                             setTimeout(function () {
                                 if (clicks === 1) {
-                                    single.call(viewModel, context.$data, event);
                                 }
                                 else {
                                     double.call(viewModel, context.$data, event);
