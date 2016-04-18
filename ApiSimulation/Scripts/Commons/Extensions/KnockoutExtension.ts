@@ -1,4 +1,4 @@
-﻿namespace Commons.Extensions
+namespace Commons.Extensions
 {
 
 
