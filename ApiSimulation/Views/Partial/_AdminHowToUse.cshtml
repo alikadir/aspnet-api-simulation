@@ -1,0 +1,97 @@
+﻿<section id="how-to-use">
+
+    <div class="page-header">
+        <h1>
+            Nasıl Kullanırım? <small>
+                <span>Tüm kullanım detayları</span>
+            </small>
+        </h1>
+    </div>
+    <div>
+        <h3>İlk Adım</h3>
+        <p>
+            İlk olarak kullanmak istediğimiz endpoint adresini oluşturarak başlamalısınız. Sayfanın en üstünde bulunan
+            <button class="btn btn-warning btn-xs" role="button" id="btn-new-operation">
+                <i class="fa fa-plus-square-o"></i> Yeni Operasyon Ekle
+            </button>
+            butonu yardımı ile yeni bir endpoint adresi belirleyin. Belirlenen endpoint adresi <u>benzersiz</u> olmalıdır.
+        </p>
+        <p>
+            <strong>Category</strong> alanında girdiğiniz isimler ile oluşturduğumuz operasyonları gruplayabilirsiniz. Gruplama işlemi sadece görsel rahatlık sağlamak için kullanılır, Operasyon işlemlerine bir etkisi yoktur.
+        </p>
+        <p>
+            Yeni bir operasyon oluşturuken veya varolan bir operasyonu güncellerken
+            <button class="btn btn-success btn-xs" title="Kaydet">
+                <i class="fa fa-check"></i>
+            </button> butonu yardımı ile kaydedebilir, <button class="btn btn-danger btn-xs" title="İptal">
+                <i class="fa fa-close"></i>
+            </button> butonu yardımı ile oluşturma veya güncelleme işlemini iptal edilebilir.
+        </p>
+    </div>
+    <br />
+    <div>
+
+        <h3>İkinci Adım</h3>
+        <p>
+            İkinci olarak oluşturduğumuz operasyon için dönüş değeri/değerleri belirlemelisiniz. Operasyon kaydının yanında bulunan
+            <button class="btn btn-primary btn-xs" title="Detay ekle">
+                <i class="fa fa-plus"></i>
+            </button>
+            buton yardımı ile dönüş değeri oluşturabilirsiniz.
+        </p>
+        <p>
+            <strong>Content</strong> alanı içerisine dönüş değeri girilir. Dönüş değeri <code>JSON</code>, <code>XML</code>, <code>HTML</code>, <code>TEXT</code>, <code>CVS</code>, <code>Document-Base64</code> olabilir. Bu alan içerisinde script kodları kullanmak da mümkündür.
+            Script kullanımı hakkında daha detaylı bilgiye <a href="#template-engine">Template Engine</a> bölümünden ulaşabilirsiniz. <br />
+            Content alanında tüm ihtiyaçlara cevap verebilecek script destekli içerikler tanımlanabilir. Bu alanda "Base64 Converter" yardımı ile döküman bazlı içerikleri de barındırabilmek mümkündür.
+        </p>
+        <p class="form-inline">
+            <strong>Base64 Converter</strong> aracı <input class="form-control" type="file" accept="image/*,application/pdf" /> yardımı ile pdf, image formatında dosyaları dönüş değeri olarak ayarlayabilirsiniz.
+        </p>
+        <p>
+            <strong>Delay</strong> alanına milisaniye cinsinden bekleme süresi verebilirsiniz. Bu özellik sayesinde backend ortamının işlem yapma süresinin uzun olması durumu simüle edilebilir.
+        </p>
+        <p>
+            <strong>Content Type</strong> alanında dönüş değeri olarak girdiğiniz verinin nasıl yorumlanması gerektiğini belirtmelisiniz. Sadece izin verilen yorumlama tipleri listelenir. Bu alan, dönüş değerinin doğru yorumlanabilmesi için <u>kritik</u> öneme sahiptir.
+        </p>
+    </div>
+    <br />
+    <div>
+        <h3>Son Adım ve Notlar</h3>
+        <p>
+            Birden çok dönüş tipi ve içeriği belirleyebilirsiniz. Birden çok dönüş tipi ve içeriği belirlenen durumda endpoint'e yapılan her istekde ilgili operasyona girilen dönüş değerleri arasından <u>rastgele</u> birini getirir.
+        </p>
+        <p>
+            Belirlediğiniz benzersiz endpoint'in sonuna farklı QueryString parametreleri ekleyerek istekde bulunabilirsiniz. Sistem istekde bulunduğunuz endpoint'in kendisini direkt bulamadığı durumda, başlangıcı eşleşen diğer olasılıkları kontrol eder.
+        </p>
+        <p>
+            Operasyonların dönüş değerleri büyük veriler olabileceğinden ve birden çok olabileceğinden dolayı ilk yükleme anında Operasyon detayları görünmezler. Dönüş değerlerini görüntüleyebilmek için operasyonların yanında bulunan
+            <button class="btn btn-warning btn-xs" title="Detayı göster">
+                <i class="fa fa-cloud-download"></i>
+            </button>
+            butonu kullanabilirsiniz.
+        </p>
+        <p>
+            Tüm operasyon ve detayları
+            <button class="btn btn-info btn-xs" title="Düzenle">
+                <i class="fa fa-pencil"></i>
+            </button>
+            butonu yardımı ile düzenlenebilir, Ayrıca Operasyonun üzerine çift tıklamak veya Content'in üzerine çift tıklamak düzenleme modunu aktifleştirir.
+            Tüm operasyon ve detayları
+            <button class="btn btn-danger btn-xs" title="Sil">
+                <i class="fa fa-close"></i>
+            </button>
+            butonu yardımı ile silinebilir.
+        </p>
+        <p>
+            Operasyonların yanında en son ne zaman çağırıldığını belirten zaman bilgisi ve toplam kaç defa çağırıldığı bilgisi vardır.
+        </p>
+        <p>
+            Operasyonların yanında bulunan
+            <button class="btn btn-success btn-xs" title="Log göster">
+                <i class="fa fa-search"></i>
+            </button>
+            butonu yardımıyla ilgili operasyona gelen isteklerin log larını görüntüleyebilirsiniz.
+        </p>
+    </div>
+
+</section>

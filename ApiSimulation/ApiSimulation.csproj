@@ -230,6 +230,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Admin\LogDetail.cshtml" />
+    <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

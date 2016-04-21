@@ -11,6 +11,12 @@ namespace ApiSimulation.Controllers
         // GET: Admin
         public ActionResult List()
         {
+            if (!HttpContext.User.Identity.IsAuthenticated)
+                HttpContext.Response.StatusCode = 401;
+            else
+                ViewBag.UserName = HttpContext.User.Identity.Name;
+
+
             var model = new List<Models.DTO.Response>();
 
             using (var db = new Models.EF.ApiSimulationEntities())
@@ -39,7 +45,7 @@ namespace ApiSimulation.Controllers
         }
 
         public ActionResult Deneme(List<Log> data)
-        { 
+        {
             return new EmptyResult();
         }
 
