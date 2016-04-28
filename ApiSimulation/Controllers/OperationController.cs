@@ -48,7 +48,9 @@ namespace ApiSimulation.Controllers
         }
         public JsonResult GetResponseDetailListByParentID(int parentId)
         {
-            return Json(new Businesses.OperationBusiness().GetResponseDetailListByParentID(parentId), JsonRequestBehavior.AllowGet);
+            var result = Json(new Businesses.OperationBusiness().GetResponseDetailListByParentID(parentId), JsonRequestBehavior.AllowGet);
+            result.MaxJsonLength = int.MaxValue;
+            return result;
         }
         public ActionResult DeleteResponseDetail(int id)
         {
