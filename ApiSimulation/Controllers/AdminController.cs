@@ -44,24 +44,23 @@ namespace ApiSimulation.Controllers
 
         }
 
-        public ActionResult Deneme(List<Log> data)
+        public ActionResult NotificationList()
         {
-            return new EmptyResult();
+            return View(new Businesses.NotificationBusiness().GetConfiguration());
         }
 
-        public class Log
+        public ActionResult NotificationSendAndUpdate(Models.DTO.NotificationConfig config, bool isSendIos, bool isSendAndroid)
         {
-            public string User { get; set; }
-            public string Platform { get; set; }
-            public string Location { get; set; }
-            public string LogText { get; set; }
-            public string AppVersion { get; set; }
-            public string Type { get; set; }
-            public string AppID { get; set; }
-            public string OsVersion { get; set; }
-            public string UserLanguage { get; set; }
-            public string DeviceModel { get; set; }
-            public string TimeStamp { get; set; }
+            var business = new Businesses.NotificationBusiness();
+            business.UpdateConfiguration(config);
+
+            if (isSendAndroid)
+                business.SendAndroid();
+
+            if (isSendIos)
+                business.SendIos();
+
+            return RedirectToAction("NotificationList");
         }
 
     }

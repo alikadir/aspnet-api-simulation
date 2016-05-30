@@ -4,7 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ApiSimulationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ApiSimulationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tNotificationConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IosDeviceToken" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="AndroidDeviceToken" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IosSenderCertificate" Type="varbinary(max)" Nullable="false" />
+          <Property Name="AndroidSenderToken" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IosDataModel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AndroidDataModel" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="tRequestLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -69,6 +81,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ApiSimulationModelStoreContainer">
+          <EntitySet Name="tNotificationConfig" EntityType="Self.tNotificationConfig" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tRequestLog" EntityType="Self.tRequestLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tResponse" EntityType="Self.tResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tResponseDetail" EntityType="Self.tResponseDetail" Schema="dbo" store:Type="Tables" />
@@ -81,23 +94,23 @@
             <End Role="tResponseDetail" EntitySet="tResponseDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ApiSimulationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ApiSimulationEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tRequestLogs" EntityType="ApiSimulationModel.tRequestLog" />
-          <EntitySet Name="tResponses" EntityType="ApiSimulationModel.tResponse" />
-          <EntitySet Name="tResponseDetails" EntityType="ApiSimulationModel.tResponseDetail" />
-          <AssociationSet Name="FK_tRequestLog_tResponse" Association="ApiSimulationModel.FK_tRequestLog_tResponse">
-            <End Role="tResponse" EntitySet="tResponses" />
-            <End Role="tRequestLog" EntitySet="tRequestLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tResponseDetail_tResponse" Association="ApiSimulationModel.FK_tResponseDetail_tResponse">
-            <End Role="tResponse" EntitySet="tResponses" />
-            <End Role="tResponseDetail" EntitySet="tResponseDetails" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="tNotificationConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IosDeviceToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AndroidDeviceToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IosSenderCertificate" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="AndroidSenderToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IosDataModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AndroidDataModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="tRequestLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -105,26 +118,26 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ResponseID" Type="Int32" Nullable="false" />
           <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RequestUserAgent" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="RequestIP" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="RequestMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RequestHeader" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RequestRaw" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tResponse" Relationship="ApiSimulationModel.FK_tRequestLog_tResponse" FromRole="tRequestLog" ToRole="tResponse" />
+          <Property Name="RequestUserAgent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestIP" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestHeader" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestRaw" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tResponse" Relationship="Self.FK_tRequestLog_tResponse" FromRole="tRequestLog" ToRole="tResponse" />
         </EntityType>
         <EntityType Name="tResponse">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Url" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Hit" Type="Int16" Nullable="false" />
           <Property Name="LastRequestDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tRequestLogs" Relationship="ApiSimulationModel.FK_tRequestLog_tResponse" FromRole="tResponse" ToRole="tRequestLog" />
-          <NavigationProperty Name="tResponseDetails" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponse" ToRole="tResponseDetail" />
+          <NavigationProperty Name="tRequestLogs" Relationship="Self.FK_tRequestLog_tResponse" FromRole="tResponse" ToRole="tRequestLog" />
+          <NavigationProperty Name="tResponseDetails" Relationship="Self.FK_tResponseDetail_tResponse" FromRole="tResponse" ToRole="tResponseDetail" />
         </EntityType>
         <EntityType Name="tResponseDetail">
           <Key>
@@ -132,18 +145,18 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ResponseID" Type="Int32" Nullable="false" />
-          <Property Name="ContentType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ContentRaw" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContentRaw" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Delay" Type="Int32" Nullable="false" />
           <Property Name="Hit" Type="Int16" Nullable="false" />
           <Property Name="UseTemplateEngine" Type="Boolean" Nullable="false" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tResponse" Relationship="ApiSimulationModel.FK_tResponseDetail_tResponse" FromRole="tResponseDetail" ToRole="tResponse" />
+          <NavigationProperty Name="tResponse" Relationship="Self.FK_tResponseDetail_tResponse" FromRole="tResponseDetail" ToRole="tResponse" />
         </EntityType>
         <Association Name="FK_tRequestLog_tResponse">
-          <End Type="ApiSimulationModel.tResponse" Role="tResponse" Multiplicity="1" />
-          <End Type="ApiSimulationModel.tRequestLog" Role="tRequestLog" Multiplicity="*" />
+          <End Role="tResponse" Type="Self.tResponse" Multiplicity="1" />
+          <End Role="tRequestLog" Type="Self.tRequestLog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tResponse">
               <PropertyRef Name="ID" />
@@ -154,8 +167,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tResponseDetail_tResponse">
-          <End Type="ApiSimulationModel.tResponse" Role="tResponse" Multiplicity="1" />
-          <End Type="ApiSimulationModel.tResponseDetail" Role="tResponseDetail" Multiplicity="*" />
+          <End Role="tResponse" Type="Self.tResponse" Multiplicity="1" />
+          <End Role="tResponseDetail" Type="Self.tResponseDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tResponse">
               <PropertyRef Name="ID" />
@@ -165,51 +178,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="ApiSimulationEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tNotificationConfigs" EntityType="Self.tNotificationConfig" />
+          <EntitySet Name="tRequestLogs" EntityType="Self.tRequestLog" />
+          <EntitySet Name="tResponses" EntityType="Self.tResponse" />
+          <EntitySet Name="tResponseDetails" EntityType="Self.tResponseDetail" />
+          <AssociationSet Name="FK_tRequestLog_tResponse" Association="Self.FK_tRequestLog_tResponse">
+            <End Role="tResponse" EntitySet="tResponses" />
+            <End Role="tRequestLog" EntitySet="tRequestLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tResponseDetail_tResponse" Association="Self.FK_tResponseDetail_tResponse">
+            <End Role="tResponse" EntitySet="tResponses" />
+            <End Role="tResponseDetail" EntitySet="tResponseDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ApiSimulationModelStoreContainer" CdmEntityContainer="ApiSimulationEntities">
+        <EntityContainerMapping StorageEntityContainer="ApiSimulationModelStoreContainer" CdmEntityContainer="ApiSimulationEntities1">
+          <EntitySetMapping Name="tNotificationConfigs">
+            <EntityTypeMapping TypeName="ApiSimulationModel.tNotificationConfig">
+              <MappingFragment StoreEntitySet="tNotificationConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IosDeviceToken" ColumnName="IosDeviceToken" />
+                <ScalarProperty Name="AndroidDeviceToken" ColumnName="AndroidDeviceToken" />
+                <ScalarProperty Name="IosSenderCertificate" ColumnName="IosSenderCertificate" />
+                <ScalarProperty Name="AndroidSenderToken" ColumnName="AndroidSenderToken" />
+                <ScalarProperty Name="IosDataModel" ColumnName="IosDataModel" />
+                <ScalarProperty Name="AndroidDataModel" ColumnName="AndroidDataModel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tRequestLogs">
             <EntityTypeMapping TypeName="ApiSimulationModel.tRequestLog">
               <MappingFragment StoreEntitySet="tRequestLog">
-                <ScalarProperty Name="RequestRaw" ColumnName="RequestRaw" />
-                <ScalarProperty Name="RequestHeader" ColumnName="RequestHeader" />
-                <ScalarProperty Name="RequestMethod" ColumnName="RequestMethod" />
-                <ScalarProperty Name="RequestIP" ColumnName="RequestIP" />
-                <ScalarProperty Name="RequestUserAgent" ColumnName="RequestUserAgent" />
-                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
-                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="RequestUserAgent" ColumnName="RequestUserAgent" />
+                <ScalarProperty Name="RequestIP" ColumnName="RequestIP" />
+                <ScalarProperty Name="RequestMethod" ColumnName="RequestMethod" />
+                <ScalarProperty Name="RequestHeader" ColumnName="RequestHeader" />
+                <ScalarProperty Name="RequestRaw" ColumnName="RequestRaw" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tResponses">
             <EntityTypeMapping TypeName="ApiSimulationModel.tResponse">
               <MappingFragment StoreEntitySet="tResponse">
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="LastRequestDate" ColumnName="LastRequestDate" />
-                <ScalarProperty Name="Hit" ColumnName="Hit" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Hit" ColumnName="Hit" />
+                <ScalarProperty Name="LastRequestDate" ColumnName="LastRequestDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tResponseDetails">
             <EntityTypeMapping TypeName="ApiSimulationModel.tResponseDetail">
               <MappingFragment StoreEntitySet="tResponseDetail">
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="UseTemplateEngine" ColumnName="UseTemplateEngine" />
-                <ScalarProperty Name="Hit" ColumnName="Hit" />
-                <ScalarProperty Name="Delay" ColumnName="Delay" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ContentRaw" ColumnName="ContentRaw" />
-                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentRaw" ColumnName="ContentRaw" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Delay" ColumnName="Delay" />
+                <ScalarProperty Name="Hit" ColumnName="Hit" />
+                <ScalarProperty Name="UseTemplateEngine" ColumnName="UseTemplateEngine" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

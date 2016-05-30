@@ -128,6 +128,16 @@
   <ItemGroup>
     <Content Include="favicon.png" />
     <Content Include="DB\DB.sql" />
+    <Content Include="Models\EF\ApiSimulation.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ApiSimulation.edmx</DependentUpon>
+      <LastGenOutput>ApiSimulation.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EF\ApiSimulation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ApiSimulation.edmx</DependentUpon>
+      <LastGenOutput>ApiSimulation.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\Dist\external.js" />
     <Content Include="Scripts\Dist\internal.js" />
     <Content Include="Scripts\Lib\jquery.toaster.js" />
@@ -141,16 +151,6 @@
     <Content Include="Styles\FontAwesome\font-awesome.min.css" />
     <Content Include="Global.asax" />
     <Content Include="gruntfile.js" />
-    <Content Include="Models\EF\ApiSimulation.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ApiSimulation.edmx</DependentUpon>
-      <LastGenOutput>ApiSimulation.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EF\ApiSimulation.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ApiSimulation.edmx</DependentUpon>
-      <LastGenOutput>ApiSimulation.cs</LastGenOutput>
-    </Content>
     <Content Include="package.json" />
     <Content Include="Scripts\Lib\bootstrap.js" />
     <Content Include="Scripts\Lib\jquery-2.2.2.js" />
@@ -167,6 +167,7 @@
     <Compile Include="App_Start\MapperConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Businesses\BusinessBase.cs" />
+    <Compile Include="Businesses\NotificationBusiness.cs" />
     <Compile Include="Businesses\OperationBusiness.cs" />
     <Compile Include="Constants\UrlConstant.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -177,6 +178,7 @@
     </Compile>
     <Compile Include="Helpers\PostDataHelper.cs" />
     <Compile Include="Helpers\LoremIpsumHelper.cs" />
+    <Compile Include="Models\DTO\NotificationConfig.cs" />
     <Compile Include="Models\DTO\RequestLog.cs" />
     <Compile Include="Models\DTO\Response.cs" />
     <Compile Include="Models\DTO\ResponseDetail.cs" />
@@ -196,6 +198,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\tNotificationConfig.cs">
+      <DependentUpon>ApiSimulation.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\tRequestLog.cs">
       <DependentUpon>ApiSimulation.tt</DependentUpon>
     </Compile>
@@ -210,6 +215,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Views\Admin\List.cshtml" />
     <EntityDeploy Include="Models\EF\ApiSimulation.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ApiSimulation.Designer.cs</LastGenOutput>
@@ -217,7 +223,6 @@
     <Content Include="Models\EF\ApiSimulation.edmx.diagram">
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Admin\List.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Styles\fonts\fontawesome-webfont.eot" />
     <Content Include="Styles\fonts\fontawesome-webfont.ttf" />
@@ -231,6 +236,7 @@
     </Content>
     <Content Include="Views\Admin\LogDetail.cshtml" />
     <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
+    <Content Include="Views\Admin\NotificationList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
