@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using PushSharp.Apple;
+using PushSharp.Google;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,12 +30,28 @@ namespace ApiSimulation.Businesses
 
         public void SendIos()
         {
-            
+            var config = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Production, localConfig.IosSenderCertificate, "");            
+            var broker = new ApnsServiceBroker(config);            
+            broker.Start();
+            broker.QueueNotification(new ApnsNotification
+            {
+                DeviceToken = localConfig.IosDeviceToken,
+                Payload = JObject.Parse(localConfig.IosDataModel)
+            });
+            broker.Stop();
         }
 
         public void SendAndroid()
         {
-
+            var config = new GcmConfiguration(localConfig.AndroidSenderToken);
+            var gcmBroker = new GcmServiceBroker(config);
+            gcmBroker.Start();
+            gcmBroker.QueueNotification(new GcmNotification
+            {
+                RegistrationIds = new List<string> { localConfig.AndroidDeviceToken },
+                Data = JObject.Parse(localConfig.AndroidDataModel),
+            });
+            gcmBroker.Stop();
         }
 
         public bool UpdateConfiguration(Models.DTO.NotificationConfig config)
@@ -52,12 +71,12 @@ namespace ApiSimulation.Businesses
 
                     var newRecord = MapperConfig.Mapper.Map<Models.EF.tNotificationConfig>(config);
 
-                    if (!config.PostedFile.HasValue)
+                    if (config.PostedFile == null)
                         newRecord.IosSenderCertificate = oldRecord.IosSenderCertificate;
                     else
                     {
                         var ms = new MemoryStream();
-                        config.PostedFile.Value.InputStream.CopyTo(ms);
+                        config.PostedFile.InputStream.CopyTo(ms);
                         newRecord.IosSenderCertificate = ms.ToArray();
                     }
 

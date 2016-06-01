@@ -11,7 +11,7 @@ namespace ApiSimulation.Models.DTO
         public string IosDeviceToken { get; set; }
         public string AndroidDeviceToken { get; set; }
         public byte[] IosSenderCertificate { get; set; }
-        public HttpPostedFileBase? PostedFile { get; set; }
+        public HttpPostedFileBase PostedFile { get; set; }
         public string AndroidSenderToken { get; set; }
         public string IosDataModel { get; set; }
         public string AndroidDataModel { get; set; }
