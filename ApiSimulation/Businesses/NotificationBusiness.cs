@@ -30,8 +30,8 @@ namespace ApiSimulation.Businesses
 
         public void SendIos()
         {
-            var config = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Production, localConfig.IosSenderCertificate, "");            
-            var broker = new ApnsServiceBroker(config);            
+            var config = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Production, localConfig.IosSenderCertificate, "");
+            var broker = new ApnsServiceBroker(config);
             broker.Start();
             broker.QueueNotification(new ApnsNotification
             {
@@ -82,6 +82,8 @@ namespace ApiSimulation.Businesses
 
                     db.tNotificationConfigs.Add(newRecord);
                     db.SaveChanges();
+
+                    localConfig = MapperConfig.Mapper.Map<Models.DTO.NotificationConfig>(newRecord);
 
                     dbTrans.Commit();
 

@@ -196,10 +196,10 @@ var Models;
                     }
                 }, this);
                 this.ShowLogDetail = function (item) {
-                    $("#iframe-log-detail").attr("src", "/Admin/LogDetail?responseId=" + item.ID);
+                    $("#iframe-modal").attr("src", "/Admin/LogDetail?responseId=" + item.ID);
                     $("#iframe-loading").show();
-                    $("#modal-log-detail .modal-title").html("<b>Log Detail - </b> <code>" + item.UrlDisplay() + "</code>");
-                    $("#modal-log-detail").modal('toggle');
+                    $("#modal-global .modal-title").html("<b>Log Detail - </b> <code>" + item.UrlDisplay() + "</code>");
+                    $("#modal-global").modal('toggle');
                 };
             }
             return AdminViewModel;

@@ -471,10 +471,10 @@ var Models;
                     }
                 }, this);
                 this.ShowLogDetail = function (item) {
-                    $("#iframe-log-detail").attr("src", "/Admin/LogDetail?responseId=" + item.ID);
+                    $("#iframe-modal").attr("src", "/Admin/LogDetail?responseId=" + item.ID);
                     $("#iframe-loading").show();
-                    $("#modal-log-detail .modal-title").html("<b>Log Detail - </b> <code>" + item.UrlDisplay() + "</code>");
-                    $("#modal-log-detail").modal('toggle');
+                    $("#modal-global .modal-title").html("<b>Log Detail - </b> <code>" + item.UrlDisplay() + "</code>");
+                    $("#modal-global").modal('toggle');
                 };
             }
             return AdminViewModel;
@@ -488,6 +488,12 @@ $(function () {
     viewModel.Load();
     ko.applyBindings(viewModel);
     $("#btn-new-operation").click(function () { return viewModel.AddNew(); });
-    $("#iframe-log-detail").on("load", function () { $("#iframe-loading").hide(); });
+    $("#iframe-modal").on("load", function () { $("#iframe-loading").hide(); });
 });
+function PushNotification() {
+    $("#iframe-modal").attr("src", "/Admin/NotificationList");
+    $("#iframe-loading").show();
+    $("#modal-global .modal-title").html("<b>Push Notification</b>");
+    $("#modal-global").modal('toggle');
+}
 //# sourceMappingURL=Admin.js.map

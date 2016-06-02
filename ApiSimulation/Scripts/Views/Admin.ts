@@ -7,6 +7,15 @@ $(function ()
     ko.applyBindings(viewModel);
 
     $("#btn-new-operation").click(() => viewModel.AddNew());
-    $("#iframe-log-detail").on("load", () => { $("#iframe-loading").hide(); });
+    $("#iframe-modal").on("load", () => { $("#iframe-loading").hide(); });
 });
+
+function PushNotification()
+{
+    $("#iframe-modal").attr("src", "/Admin/NotificationList");
+    $("#iframe-loading").show();
+
+    $("#modal-global .modal-title").html("<b>Push Notification</b>");
+    $("#modal-global").modal('toggle');
+}
 

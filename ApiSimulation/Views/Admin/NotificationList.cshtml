@@ -1,10 +1,54 @@
 ﻿@model ApiSimulation.Models.DTO.NotificationConfig
 
-    <html>
-    <head>
-        <title>Notification</title>
-    </head>
-    <body style="font-family:Arial, Helvetica, sans-serif">
-       @Html.BeginForm("")
-    </body>
+<html>
+<head>
+    <title>Notification</title>
+</head>
+<body style="font-family:Arial, Helvetica, sans-serif">
+    @using (Html.BeginForm("NotificationSendAndUpdate", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.LabelFor(model => model.ID)
+        <br />
+        @Html.TextBoxFor(model => model.ID, new { @disabled = "disabled" })
+        <hr />
+
+        @Html.LabelFor(model => model.IosDeviceToken)
+        <br />
+        @Html.TextBoxFor(model => model.IosDeviceToken)
+        <hr />
+
+        @Html.LabelFor(model => model.AndroidDeviceToken)
+        <br />
+        @Html.TextBoxFor(model => model.AndroidDeviceToken)
+        <hr />
+
+        @Html.LabelFor(model => model.IosSenderCertificate)
+        <br />
+        <input type="file" name="PostedFile" />
+        <hr />
+
+        @Html.LabelFor(model => model.AndroidSenderToken)
+        <br />
+        @Html.TextBoxFor(model => model.AndroidSenderToken)
+        <hr />
+
+
+        @Html.LabelFor(model => model.IosDataModel)
+        <br />
+        @Html.TextAreaFor(model => model.IosDataModel)
+        <hr />
+
+        @Html.LabelFor(model => model.AndroidDataModel)
+        <br />
+        @Html.TextAreaFor(model => model.AndroidDataModel)
+        <hr />
+
+        <button type="submit" name="isSendIos" value="true">IOS</button>
+        <br />
+        <button type="submit" name="isSendAndroid" value="true">Android</button>
+
+    }
+
+
+</body>
 </html>

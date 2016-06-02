@@ -49,7 +49,7 @@ namespace ApiSimulation.Controllers
             return View(new Businesses.NotificationBusiness().GetConfiguration());
         }
 
-        public ActionResult NotificationSendAndUpdate(Models.DTO.NotificationConfig config, bool isSendIos, bool isSendAndroid)
+        public ActionResult NotificationSendAndUpdate(Models.DTO.NotificationConfig config, bool isSendIos = false, bool isSendAndroid = false)
         {
             var business = new Businesses.NotificationBusiness();
             business.UpdateConfiguration(config);
