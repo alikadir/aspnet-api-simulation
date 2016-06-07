@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a79535d8ef474fbea499d17db70154b2" Name="Diagram1">
-        <EntityTypeShape EntityType="ApiSimulationModel.tNotificationConfig" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ApiSimulationModel.tRequestLog" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ApiSimulationModel.tResponse" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="ApiSimulationModel.tResponseDetail" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <AssociationConnector Association="ApiSimulationModel.FK_tRequestLog_tResponse" ManuallyRouted="false" />
-        <AssociationConnector Association="ApiSimulationModel.FK_tResponseDetail_tResponse" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tNotificationConfig" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tRequestLog" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tResponse" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tResponseDetail" Width="1.5" PointX="3" PointY="4.625" />
+        <AssociationConnector Association="ApiSimulationModel.FK_tRequestLog_tResponse" />
+        <AssociationConnector Association="ApiSimulationModel.FK_tResponseDetail_tResponse" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

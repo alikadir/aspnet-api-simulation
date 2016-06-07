@@ -72,12 +72,16 @@ namespace ApiSimulation.Businesses
                     var newRecord = MapperConfig.Mapper.Map<Models.EF.tNotificationConfig>(config);
 
                     if (config.PostedFile == null)
+                    {
                         newRecord.IosSenderCertificate = oldRecord.IosSenderCertificate;
+                        newRecord.IosSenderCertificateName = oldRecord.IosSenderCertificateName;
+                    }
                     else
                     {
                         var ms = new MemoryStream();
                         config.PostedFile.InputStream.CopyTo(ms);
                         newRecord.IosSenderCertificate = ms.ToArray();
+                        newRecord.IosSenderCertificateName = config.PostedFile.FileName;
                     }
 
                     db.tNotificationConfigs.Add(newRecord);
@@ -89,7 +93,7 @@ namespace ApiSimulation.Businesses
 
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     dbTrans.Rollback();
 

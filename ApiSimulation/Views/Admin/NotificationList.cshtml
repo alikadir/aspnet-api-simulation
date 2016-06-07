@@ -22,7 +22,7 @@
         @Html.TextBoxFor(model => model.AndroidDeviceToken)
         <hr />
 
-        @Html.LabelFor(model => model.IosSenderCertificate)
+        @Html.LabelFor(model => model.IosSenderCertificate) <b>@Html.LabelFor(model => model.IosSenderCertificateName)</b>
         <br />
         <input type="file" name="PostedFile" />
         <hr />

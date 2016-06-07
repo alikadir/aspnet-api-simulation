@@ -7,10 +7,12 @@ namespace ApiSimulation.Models.DTO
 {
     public sealed class NotificationConfig
     {
+        public int PushNotificationID { get; set; }
         public int ID { get; set; }
         public string IosDeviceToken { get; set; }
         public string AndroidDeviceToken { get; set; }
         public byte[] IosSenderCertificate { get; set; }
+        public string IosSenderCertificateName { get; set; }
         public HttpPostedFileBase PostedFile { get; set; }
         public string AndroidSenderToken { get; set; }
         public string IosDataModel { get; set; }
