@@ -6,9 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a79535d8ef474fbea499d17db70154b2" Name="Diagram1">
         <EntityTypeShape EntityType="ApiSimulationModel.tNotificationConfig" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ApiSimulationModel.tRequestLog" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tNotificationContent" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tRequestLog" Width="1.5" PointX="3" PointY="4.875" />
         <EntityTypeShape EntityType="ApiSimulationModel.tResponse" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="ApiSimulationModel.tResponseDetail" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="ApiSimulationModel.tResponseDetail" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="ApiSimulationModel.FK_tRequestLog_tResponse" />
         <AssociationConnector Association="ApiSimulationModel.FK_tResponseDetail_tResponse" />
       </Diagram>

@@ -13,10 +13,10 @@ namespace ApiSimulation.Models.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ApiSimulationEntities : DbContext
+    public partial class PHO_PARTEntities : DbContext
     {
-        public ApiSimulationEntities()
-            : base("name=ApiSimulationEntities")
+        public PHO_PARTEntities()
+            : base("name=PHO_PARTEntities")
         {
         }
     
@@ -25,10 +25,8 @@ namespace ApiSimulation.Models.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tNotificationConfig> tNotificationConfigs { get; set; }
-        public virtual DbSet<tNotificationContent> tNotificationContents { get; set; }
-        public virtual DbSet<tRequestLog> tRequestLogs { get; set; }
-        public virtual DbSet<tResponse> tResponses { get; set; }
-        public virtual DbSet<tResponseDetail> tResponseDetails { get; set; }
+        public virtual DbSet<AndroidDeviceToken> AndroidDeviceTokens { get; set; }
+        public virtual DbSet<IosDeviceToken> IosDeviceTokens { get; set; }
+        public virtual DbSet<MobileApplication> MobileApplications { get; set; }
     }
 }

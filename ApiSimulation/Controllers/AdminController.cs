@@ -48,8 +48,8 @@ namespace ApiSimulation.Controllers
         {
             return View(new Businesses.NotificationBusiness().GetConfiguration());
         }
-
-        public ActionResult NotificationSendAndUpdate(Models.DTO.NotificationConfig config, bool isSendIos = false, bool isSendAndroid = false)
+        /*
+        public ActionResult NotificationSendAndUpdate(Models.DTO.NotificationConfig config, string selectedContentTitle, bool isSendIos = false, bool isSendAndroid = false)
         {
             var business = new Businesses.NotificationBusiness();
             business.UpdateConfiguration(config);
@@ -62,6 +62,7 @@ namespace ApiSimulation.Controllers
 
             return RedirectToAction("NotificationList");
         }
+        */
 
     }
 }

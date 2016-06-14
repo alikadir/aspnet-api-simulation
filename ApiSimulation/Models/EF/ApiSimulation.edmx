@@ -10,13 +10,20 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PushNotificationID" Type="int" Nullable="false" />
           <Property Name="IosDeviceToken" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="AndroidDeviceToken" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="IosSenderCertificate" Type="varbinary(max)" Nullable="false" />
-          <Property Name="IosSenderCertificateName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IosSenderCertificate" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="AndroidSenderToken" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="IosDataModel" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AndroidDataModel" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tNotificationContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IosModel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AndroidModel" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="tRequestLog">
           <Key>
@@ -83,6 +90,7 @@
         </Association>
         <EntityContainer Name="ApiSimulationModelStoreContainer">
           <EntitySet Name="tNotificationConfig" EntityType="Self.tNotificationConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNotificationContent" EntityType="Self.tNotificationContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tRequestLog" EntityType="Self.tRequestLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tResponse" EntityType="Self.tResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tResponseDetail" EntityType="Self.tResponseDetail" Schema="dbo" store:Type="Tables" />
@@ -101,6 +109,7 @@
       <Schema Namespace="ApiSimulationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ApiSimulationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tNotificationConfigs" EntityType="ApiSimulationModel.tNotificationConfig" />
+          <EntitySet Name="tNotificationContents" EntityType="ApiSimulationModel.tNotificationContent" />
           <EntitySet Name="tRequestLogs" EntityType="ApiSimulationModel.tRequestLog" />
           <EntitySet Name="tResponses" EntityType="ApiSimulationModel.tResponse" />
           <EntitySet Name="tResponseDetails" EntityType="ApiSimulationModel.tResponseDetail" />
@@ -118,13 +127,20 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PushNotificationID" Type="Int32" Nullable="false" />
           <Property Name="IosDeviceToken" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AndroidDeviceToken" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IosSenderCertificate" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="IosSenderCertificateName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IosSenderCertificate" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AndroidSenderToken" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IosDataModel" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AndroidDataModel" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tNotificationContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IosModel" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AndroidModel" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tRequestLog">
           <Key>
@@ -202,13 +218,21 @@
           <EntitySetMapping Name="tNotificationConfigs">
             <EntityTypeMapping TypeName="ApiSimulationModel.tNotificationConfig">
               <MappingFragment StoreEntitySet="tNotificationConfig">
-                <ScalarProperty Name="AndroidDataModel" ColumnName="AndroidDataModel" />
-                <ScalarProperty Name="IosDataModel" ColumnName="IosDataModel" />
                 <ScalarProperty Name="AndroidSenderToken" ColumnName="AndroidSenderToken" />
-                <ScalarProperty Name="IosSenderCertificateName" ColumnName="IosSenderCertificateName" />
                 <ScalarProperty Name="IosSenderCertificate" ColumnName="IosSenderCertificate" />
                 <ScalarProperty Name="AndroidDeviceToken" ColumnName="AndroidDeviceToken" />
                 <ScalarProperty Name="IosDeviceToken" ColumnName="IosDeviceToken" />
+                <ScalarProperty Name="PushNotificationID" ColumnName="PushNotificationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNotificationContents">
+            <EntityTypeMapping TypeName="ApiSimulationModel.tNotificationContent">
+              <MappingFragment StoreEntitySet="tNotificationContent">
+                <ScalarProperty Name="AndroidModel" ColumnName="AndroidModel" />
+                <ScalarProperty Name="IosModel" ColumnName="IosModel" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

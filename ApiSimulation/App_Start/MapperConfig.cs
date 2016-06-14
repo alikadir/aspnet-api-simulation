@@ -49,7 +49,7 @@ namespace ApiSimulation
                 cfg.CreateMap<Models.EF.tRequestLog, Models.DTO.RequestLog>();
 
                 #endregion
-                
+
                 #region NotificationConfig
 
                 // DTO to EF
@@ -59,9 +59,17 @@ namespace ApiSimulation
                 cfg.CreateMap<Models.EF.tNotificationConfig, Models.DTO.NotificationConfig>();
 
                 #endregion
+                
+                #region NotificationContent
 
+                // DTO to EF
+                cfg.CreateMap<Models.DTO.NotificationContent, Models.EF.tNotificationContent>();
 
+                // EF to DTO
+                cfg.CreateMap<Models.EF.tNotificationContent, Models.DTO.NotificationContent>();
 
+                #endregion
+                
             });
         }
 

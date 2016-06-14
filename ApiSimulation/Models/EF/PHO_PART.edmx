@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PHO_PARTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AndroidDeviceToken">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceToke" Type="nvarchar" MaxLength="500" />
+          <Property Name="RecordDate" Type="datetime" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnReadBadge" Type="int" Nullable="false" />
+          <Property Name="Unique" Type="nvarchar" MaxLength="500" />
+          <Property Name="Site" Type="nvarchar" MaxLength="25" />
+          <Property Name="Kampanya" Type="int" />
+          <Property Name="Read" Type="bit" Nullable="false" />
+          <Property Name="Error" Type="nvarchar(max)" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="SendDate" Type="datetime" />
+          <Property Name="History" Type="bit" Nullable="false" />
+          <Property Name="Imei" Type="nvarchar" MaxLength="100" />
+          <Property Name="Imsi" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mac" Type="nvarchar" MaxLength="100" />
+          <Property Name="Serial" Type="nvarchar" MaxLength="100" />
+          <Property Name="AndroidId" Type="nvarchar" MaxLength="100" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="VersionCode" Type="int" />
+          <Property Name="VersionName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MobileApplicationID" Type="int" />
+        </EntityType>
+        <EntityType Name="IosDeviceToken">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceToke" Type="nvarchar" MaxLength="100" />
+          <Property Name="RecordDate" Type="datetime" />
+          <Property Name="UnReadBadge" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unique" Type="nvarchar" MaxLength="500" />
+          <Property Name="Site" Type="nvarchar" MaxLength="25" />
+          <Property Name="Kampanya" Type="int" />
+          <Property Name="Read" Type="bit" Nullable="false" />
+          <Property Name="Error" Type="nvarchar(max)" />
+          <Property Name="SendDate" Type="datetime" />
+          <Property Name="History" Type="bit" Nullable="false" />
+          <Property Name="MobileApplicationID" Type="int" />
+        </EntityType>
+        <EntityType Name="MobileApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Certificate" Type="nvarchar" MaxLength="1000" />
+          <Property Name="LinkName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SiteID" Type="int" Nullable="false" />
+          <Property Name="Platform" Type="tinyint" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID">
+          <End Role="MobileApplication" Type="Self.MobileApplication" Multiplicity="0..1" />
+          <End Role="AndroidDeviceToken" Type="Self.AndroidDeviceToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MobileApplication">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AndroidDeviceToken">
+              <PropertyRef Name="MobileApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID">
+          <End Role="MobileApplication" Type="Self.MobileApplication" Multiplicity="0..1" />
+          <End Role="IosDeviceToken" Type="Self.IosDeviceToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MobileApplication">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IosDeviceToken">
+              <PropertyRef Name="MobileApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PHO_PARTModelStoreContainer">
+          <EntitySet Name="AndroidDeviceToken" EntityType="Self.AndroidDeviceToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IosDeviceToken" EntityType="Self.IosDeviceToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileApplication" EntityType="Self.MobileApplication" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID" Association="Self.FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID">
+            <End Role="MobileApplication" EntitySet="MobileApplication" />
+            <End Role="AndroidDeviceToken" EntitySet="AndroidDeviceToken" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID" Association="Self.FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID">
+            <End Role="MobileApplication" EntitySet="MobileApplication" />
+            <End Role="IosDeviceToken" EntitySet="IosDeviceToken" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PHO_PARTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AndroidDeviceToken">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceToke" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RecordDate" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnReadBadge" Type="Int32" Nullable="false" />
+          <Property Name="Unique" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Site" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Kampanya" Type="Int32" />
+          <Property Name="Read" Type="Boolean" Nullable="false" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SendDate" Type="DateTime" Precision="3" />
+          <Property Name="History" Type="Boolean" Nullable="false" />
+          <Property Name="Imei" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Imsi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mac" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Serial" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AndroidId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="VersionCode" Type="Int32" />
+          <Property Name="VersionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MobileApplicationID" Type="Int32" />
+          <NavigationProperty Name="MobileApplication" Relationship="Self.FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID" FromRole="AndroidDeviceToken" ToRole="MobileApplication" />
+        </EntityType>
+        <EntityType Name="IosDeviceToken">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceToke" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RecordDate" Type="DateTime" Precision="3" />
+          <Property Name="UnReadBadge" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unique" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Site" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Kampanya" Type="Int32" />
+          <Property Name="Read" Type="Boolean" Nullable="false" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SendDate" Type="DateTime" Precision="3" />
+          <Property Name="History" Type="Boolean" Nullable="false" />
+          <Property Name="MobileApplicationID" Type="Int32" />
+          <NavigationProperty Name="MobileApplication" Relationship="Self.FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID" FromRole="IosDeviceToken" ToRole="MobileApplication" />
+        </EntityType>
+        <EntityType Name="MobileApplication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Certificate" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="LinkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SiteID" Type="Int32" Nullable="false" />
+          <Property Name="Platform" Type="Byte" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="AndroidDeviceTokens" Relationship="Self.FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID" FromRole="MobileApplication" ToRole="AndroidDeviceToken" />
+          <NavigationProperty Name="IosDeviceTokens" Relationship="Self.FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID" FromRole="MobileApplication" ToRole="IosDeviceToken" />
+        </EntityType>
+        <Association Name="FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID">
+          <End Role="MobileApplication" Type="Self.MobileApplication" Multiplicity="0..1" />
+          <End Role="AndroidDeviceToken" Type="Self.AndroidDeviceToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MobileApplication">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AndroidDeviceToken">
+              <PropertyRef Name="MobileApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID">
+          <End Role="MobileApplication" Type="Self.MobileApplication" Multiplicity="0..1" />
+          <End Role="IosDeviceToken" Type="Self.IosDeviceToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MobileApplication">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IosDeviceToken">
+              <PropertyRef Name="MobileApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PHO_PARTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AndroidDeviceTokens" EntityType="Self.AndroidDeviceToken" />
+          <EntitySet Name="IosDeviceTokens" EntityType="Self.IosDeviceToken" />
+          <EntitySet Name="MobileApplications" EntityType="Self.MobileApplication" />
+          <AssociationSet Name="FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID" Association="Self.FK_dbo_AndroidDeviceToken_dbo_MobileApplication_MobileApplicationID">
+            <End Role="MobileApplication" EntitySet="MobileApplications" />
+            <End Role="AndroidDeviceToken" EntitySet="AndroidDeviceTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID" Association="Self.FK_dbo_IosDeviceToken_dbo_MobileApplication_MobileApplicationID">
+            <End Role="MobileApplication" EntitySet="MobileApplications" />
+            <End Role="IosDeviceToken" EntitySet="IosDeviceTokens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PHO_PARTModelStoreContainer" CdmEntityContainer="PHO_PARTEntities">
+          <EntitySetMapping Name="AndroidDeviceTokens">
+            <EntityTypeMapping TypeName="PHO_PARTModel.AndroidDeviceToken">
+              <MappingFragment StoreEntitySet="AndroidDeviceToken">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceToke" ColumnName="DeviceToke" />
+                <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UnReadBadge" ColumnName="UnReadBadge" />
+                <ScalarProperty Name="Unique" ColumnName="Unique" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Kampanya" ColumnName="Kampanya" />
+                <ScalarProperty Name="Read" ColumnName="Read" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Imei" ColumnName="Imei" />
+                <ScalarProperty Name="Imsi" ColumnName="Imsi" />
+                <ScalarProperty Name="Mac" ColumnName="Mac" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="AndroidId" ColumnName="AndroidId" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="VersionCode" ColumnName="VersionCode" />
+                <ScalarProperty Name="VersionName" ColumnName="VersionName" />
+                <ScalarProperty Name="MobileApplicationID" ColumnName="MobileApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IosDeviceTokens">
+            <EntityTypeMapping TypeName="PHO_PARTModel.IosDeviceToken">
+              <MappingFragment StoreEntitySet="IosDeviceToken">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceToke" ColumnName="DeviceToke" />
+                <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+                <ScalarProperty Name="UnReadBadge" ColumnName="UnReadBadge" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Unique" ColumnName="Unique" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Kampanya" ColumnName="Kampanya" />
+                <ScalarProperty Name="Read" ColumnName="Read" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="MobileApplicationID" ColumnName="MobileApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileApplications">
+            <EntityTypeMapping TypeName="PHO_PARTModel.MobileApplication">
+              <MappingFragment StoreEntitySet="MobileApplication">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Certificate" ColumnName="Certificate" />
+                <ScalarProperty Name="LinkName" ColumnName="LinkName" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="Platform" ColumnName="Platform" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

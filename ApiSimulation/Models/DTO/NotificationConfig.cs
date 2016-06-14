@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace ApiSimulation.Models.DTO
 {
@@ -11,12 +8,9 @@ namespace ApiSimulation.Models.DTO
         public int ID { get; set; }
         public string IosDeviceToken { get; set; }
         public string AndroidDeviceToken { get; set; }
-        public byte[] IosSenderCertificate { get; set; }
-        public string IosSenderCertificateName { get; set; }
-        public HttpPostedFileBase PostedFile { get; set; }
+        public string IosSenderCertificate { get; set; }
         public string AndroidSenderToken { get; set; }
-        public string IosDataModel { get; set; }
-        public string AndroidDataModel { get; set; }
+        public List<NotificationContent> ContentModelList { get; set; }
 
     }
 }

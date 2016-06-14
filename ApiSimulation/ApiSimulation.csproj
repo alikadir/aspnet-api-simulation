@@ -166,6 +166,16 @@
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
       <LastGenOutput>ApiSimulation.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\EF\PHO_PART.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PHO_PART.edmx</DependentUpon>
+      <LastGenOutput>PHO_PART.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EF\PHO_PART.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PHO_PART.edmx</DependentUpon>
+      <LastGenOutput>PHO_PART.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\Dist\external.js" />
     <Content Include="Scripts\Dist\internal.js" />
     <Content Include="Scripts\Lib\jquery.toaster.js" />
@@ -207,10 +217,14 @@
     <Compile Include="Helpers\PostDataHelper.cs" />
     <Compile Include="Helpers\LoremIpsumHelper.cs" />
     <Compile Include="Models\DTO\NotificationConfig.cs" />
+    <Compile Include="Models\DTO\NotificationContent.cs" />
     <Compile Include="Models\DTO\RequestLog.cs" />
     <Compile Include="Models\DTO\Response.cs" />
     <Compile Include="Models\DTO\ResponseDetail.cs" />
     <Compile Include="Models\DTO\ResponseDetailBasic.cs" />
+    <Compile Include="Models\EF\AndroidDeviceToken.cs">
+      <DependentUpon>PHO_PART.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\ApiSimulation.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -226,7 +240,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\IosDeviceToken.cs">
+      <DependentUpon>PHO_PART.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\MobileApplication.cs">
+      <DependentUpon>PHO_PART.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\PHO_PART.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PHO_PART.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\PHO_PART.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PHO_PART.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\PHO_PART.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PHO_PART.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\tNotificationConfig.cs">
+      <DependentUpon>ApiSimulation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\tNotificationContent.cs">
       <DependentUpon>ApiSimulation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\tRequestLog.cs">
@@ -250,6 +288,13 @@
     </EntityDeploy>
     <Content Include="Models\EF\ApiSimulation.edmx.diagram">
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\EF\PHO_PART.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PHO_PART.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EF\PHO_PART.edmx.diagram">
+      <DependentUpon>PHO_PART.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Styles\fonts\fontawesome-webfont.eot" />

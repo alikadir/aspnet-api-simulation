@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace ApiSimulation.Businesses
 {
@@ -18,8 +19,11 @@ namespace ApiSimulation.Businesses
         {
             using (var db = new Models.EF.ApiSimulationEntities())
             {
-                var result = db.tNotificationConfigs.FirstOrDefault();
-                localConfig = MapperConfig.Mapper.Map<Models.DTO.NotificationConfig>(result);
+                var resultConfig = db.tNotificationConfigs.FirstOrDefault();
+                var resultContent = db.tNotificationContents.ToList();
+                localConfig = MapperConfig.Mapper.Map<Models.DTO.NotificationConfig>(resultConfig);
+
+                localConfig.ContentModelList = MapperConfig.Mapper.Map<List<Models.DTO.NotificationContent>>(resultContent);
             }
         }
 
@@ -27,7 +31,7 @@ namespace ApiSimulation.Businesses
         {
             return localConfig;
         }
-
+        /*
         public void SendIos()
         {
             var config = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Production, localConfig.IosSenderCertificate, "");
@@ -103,6 +107,6 @@ namespace ApiSimulation.Businesses
 
             }
         }
-
+        */
     }
 }

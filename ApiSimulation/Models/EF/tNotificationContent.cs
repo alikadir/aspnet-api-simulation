@@ -12,13 +12,11 @@ namespace ApiSimulation.Models.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class tNotificationConfig
+    public partial class tNotificationContent
     {
         public int ID { get; set; }
-        public int PushNotificationID { get; set; }
-        public string IosDeviceToken { get; set; }
-        public string AndroidDeviceToken { get; set; }
-        public string IosSenderCertificate { get; set; }
-        public string AndroidSenderToken { get; set; }
+        public string Title { get; set; }
+        public string IosModel { get; set; }
+        public string AndroidModel { get; set; }
     }
 }
