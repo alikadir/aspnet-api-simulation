@@ -154,8 +154,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.png" />
     <Content Include="DB\DB.sql" />
+    <Content Include="favicon.png" />
     <Content Include="Models\EF\ApiSimulation.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ApiSimulation.edmx</DependentUpon>
