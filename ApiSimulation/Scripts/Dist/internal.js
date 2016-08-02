@@ -20,7 +20,7 @@ var Commons;
         var ContentTypeConstant = (function () {
             function ContentTypeConstant() {
             }
-            ContentTypeConstant.AllowedContentTypes = ["application/json", "application/xml", "text/html", "text/plain", "text/csv", "image/png", "image/jpeg", "application/pdf"];
+            ContentTypeConstant.AllowedContentTypes = ["application/json", "application/xml", "text/html", "text/plain", "text/csv", "image/png", "image/jpeg", "application/pdf", "video/mp4"];
             return ContentTypeConstant;
         }());
         Constants.ContentTypeConstant = ContentTypeConstant;
