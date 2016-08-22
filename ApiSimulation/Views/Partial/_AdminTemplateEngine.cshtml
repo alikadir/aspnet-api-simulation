@@ -116,4 +116,34 @@ ArrayCount = @@obj.Length
   }
 }
 </pre>
+  <p><strong>Özel StatusCode ile response content döndürmek</strong></p>
+<pre>
+@@if(durum)
+ {
+    Model.Response.TrySkipIisCustomErrors = true;
+    Model.Response.StatusCode = 412;
+    &lt;text&gt;
+    { "Hata":true, "Message":"xxx" }
+    &lt;/text&gt;
+ }
+
+@@if(durum)
+ {
+    Model.Response.TrySkipIisCustomErrors = true;
+    Model.Response.StatusCode = 500;
+    &lt;text&gt;
+    { "Hata":true, "Message":"yyy" }
+    &lt;/text&gt;
+ }
+
+@@if(durum)
+ {
+    Model.Response.TrySkipIisCustomErrors = true;
+    Model.Response.StatusCode = 401;
+    &lt;text&gt;
+    { "Hata":true, "Message":"zzz" }
+    &lt;/text&gt;
+ }
+</pre>
+
 </section>
