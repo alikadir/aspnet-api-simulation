@@ -28,17 +28,25 @@ namespace ApiSimulation.Controllers
 
             return View(model);
         }
-        public ActionResult LogDetail(int responseId)
+        public ActionResult LogDetail(int responseId, bool reload = false)
         {
 
             var model = new List<Models.DTO.RequestLog>();
 
             using (var db = new Models.EF.ApiSimulationEntities())
             {
-                var result = db.tRequestLogs.Where(x => x.ResponseID == responseId).OrderByDescending(x => x.RequestDate).ToList();
+                List<Models.EF.tRequestLog> result;
+
+                if (reload)
+                    result = db.tRequestLogs.Where(x => x.ResponseID == responseId).OrderByDescending(x => x.RequestDate).Take(50).ToList();
+                else
+                    result = db.tRequestLogs.Where(x => x.ResponseID == responseId).OrderByDescending(x => x.RequestDate).ToList();
 
                 model = MapperConfig.Mapper.Map<List<Models.DTO.RequestLog>>(result);
             }
+
+            ViewBag.Reload = reload;
+            ViewBag.ResponseId = responseId;
 
             return View(model);
 

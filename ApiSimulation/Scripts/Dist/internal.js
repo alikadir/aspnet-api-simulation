@@ -5,10 +5,10 @@ var Commons;
         var Base64Constant = (function () {
             function Base64Constant() {
             }
-            Base64Constant.Base64StartTag = "data:";
-            Base64Constant.Base64EndTag = ";base64,";
             return Base64Constant;
         }());
+        Base64Constant.Base64StartTag = "data:";
+        Base64Constant.Base64EndTag = ";base64,";
         Constants.Base64Constant = Base64Constant;
     })(Constants = Commons.Constants || (Commons.Constants = {}));
 })(Commons || (Commons = {}));
@@ -20,9 +20,9 @@ var Commons;
         var ContentTypeConstant = (function () {
             function ContentTypeConstant() {
             }
-            ContentTypeConstant.AllowedContentTypes = ["application/json", "application/xml", "text/html", "text/plain", "text/csv", "image/png", "image/jpeg", "application/pdf", "video/mp4"];
             return ContentTypeConstant;
         }());
+        ContentTypeConstant.AllowedContentTypes = ["application/json", "application/xml", "text/html", "text/plain", "text/csv", "image/png", "image/jpeg", "application/pdf", "video/mp4"];
         Constants.ContentTypeConstant = ContentTypeConstant;
     })(Constants = Commons.Constants || (Commons.Constants = {}));
 })(Commons || (Commons = {}));
@@ -58,6 +58,29 @@ var Commons;
                 });
             }
         };
+        /*
+                ko.extenders.required = (target: any): any =>
+                {
+                    target.hasError = ko.observable();
+                    target.validationMessage = ko.observable();
+            
+                    //define a function to do validation
+                    function validate(newValue)
+                    {
+                        target.hasError(newValue ? false : true);
+                        target.validationMessage(newValue ? "" : "Boş geçilemez!");
+                    }
+            
+                    //initial validation
+                    validate(target());
+            
+                    //validate whenever the value changes
+                    target.subscribe(validate);
+            
+                    //return the original observable
+                    return target;
+                };
+         */
     })(Extensions = Commons.Extensions || (Commons.Extensions = {}));
 })(Commons || (Commons = {}));
 //# sourceMappingURL=KnockoutExtension.js.map
@@ -68,15 +91,15 @@ var Commons;
         var Base64Helper = (function () {
             function Base64Helper() {
             }
-            Base64Helper.detectContentType = function (base64) {
-                return base64.substring(base64.indexOf(Commons.Constants.Base64Constant.Base64StartTag) + Commons.Constants.Base64Constant.Base64StartTag.length, base64.indexOf(Commons.Constants.Base64Constant.Base64EndTag));
-            };
-            Base64Helper.clearBase64 = function (base64, contentType) {
-                var combine = Commons.Constants.Base64Constant.Base64StartTag + contentType + Commons.Constants.Base64Constant.Base64EndTag.replace("base64,", "");
-                return base64.substring(base64.indexOf(combine) + combine.length);
-            };
             return Base64Helper;
         }());
+        Base64Helper.detectContentType = function (base64) {
+            return base64.substring(base64.indexOf(Commons.Constants.Base64Constant.Base64StartTag) + Commons.Constants.Base64Constant.Base64StartTag.length, base64.indexOf(Commons.Constants.Base64Constant.Base64EndTag));
+        };
+        Base64Helper.clearBase64 = function (base64, contentType) {
+            var combine = Commons.Constants.Base64Constant.Base64StartTag + contentType + Commons.Constants.Base64Constant.Base64EndTag.replace("base64,", "");
+            return base64.substring(base64.indexOf(combine) + combine.length);
+        };
         Helpers.Base64Helper = Base64Helper;
     })(Helpers = Commons.Helpers || (Commons.Helpers = {}));
 })(Commons || (Commons = {}));
@@ -123,17 +146,17 @@ var Commons;
         var ObservebleHelper = (function () {
             function ObservebleHelper() {
             }
-            ObservebleHelper.ObservableToClassicObject = function (observableObj) {
-                return ko.viewmodel.toModel(observableObj);
-            };
-            ObservebleHelper.ClassicObjectToObservable = function (classicObj) {
-                return ko.viewmodel.fromModel(classicObj);
-            };
-            ObservebleHelper.UpdateObserveble = function (observableObj, classicObj) {
-                ko.viewmodel.updateFromModel(observableObj, classicObj);
-            };
             return ObservebleHelper;
         }());
+        ObservebleHelper.ObservableToClassicObject = function (observableObj) {
+            return ko.viewmodel.toModel(observableObj);
+        };
+        ObservebleHelper.ClassicObjectToObservable = function (classicObj) {
+            return ko.viewmodel.fromModel(classicObj);
+        };
+        ObservebleHelper.UpdateObserveble = function (observableObj, classicObj) {
+            ko.viewmodel.updateFromModel(observableObj, classicObj);
+        };
         Helpers.ObservebleHelper = ObservebleHelper;
     })(Helpers = Commons.Helpers || (Commons.Helpers = {}));
 })(Commons || (Commons = {}));
@@ -178,25 +201,25 @@ var Models;
         var Response = (function (_super) {
             __extends(Response, _super);
             function Response(item) {
-                var _this = this;
-                _super.call(this, item);
-                this.ID = 0;
-                this.Url = ko.observable("");
-                this.Category = ko.observable("");
-                this.UrlDisplay = ko.computed(function () { return document.location.origin + '/' + _this.Url(); });
-                this.Hit = 0;
-                this.LastRequestDate = moment().format();
-                this.CreateDate = moment().format();
-                this.Items = ko.observableArray([]);
+                var _this = _super.call(this, item) || this;
+                _this.ID = 0;
+                _this.Url = ko.observable("");
+                _this.Category = ko.observable("");
+                _this.UrlDisplay = ko.computed(function () { return document.location.origin + '/' + _this.Url(); });
+                _this.Hit = 0;
+                _this.LastRequestDate = moment().format();
+                _this.CreateDate = moment().format();
+                _this.Items = ko.observableArray([]);
                 if (item != null) {
-                    this.ID = item.ID;
-                    this.Hit = item.Hit;
-                    this.Url(item.Url);
-                    this.Category(item.Category);
-                    this.LastRequestDate = item.LastRequestDate;
-                    this.CreateDate = item.CreateDate;
-                    this.IsEditing(false);
+                    _this.ID = item.ID;
+                    _this.Hit = item.Hit;
+                    _this.Url(item.Url);
+                    _this.Category(item.Category);
+                    _this.LastRequestDate = item.LastRequestDate;
+                    _this.CreateDate = item.CreateDate;
+                    _this.IsEditing(false);
                 }
+                return _this;
             }
             Response.prototype.IsValid = function (showMessage) {
                 var self = this;
@@ -231,26 +254,27 @@ var Models;
         var ResponseDetail = (function (_super) {
             __extends(ResponseDetail, _super);
             function ResponseDetail(item) {
-                _super.call(this, item);
-                this.ID = 0;
-                this.Delay = ko.observable(0);
-                this.ContentRaw = ko.observable("");
-                this.ContentType = ko.observable("");
-                this.Hit = 0;
-                this.CreateDate = moment().format();
-                this.ResponseID = 0;
-                this.UseTemplateEngine = ko.observable(true);
+                var _this = _super.call(this, item) || this;
+                _this.ID = 0;
+                _this.Delay = ko.observable(0);
+                _this.ContentRaw = ko.observable("");
+                _this.ContentType = ko.observable("");
+                _this.Hit = 0;
+                _this.CreateDate = moment().format();
+                _this.ResponseID = 0;
+                _this.UseTemplateEngine = ko.observable(true);
                 if (item != null) {
-                    this.ID = item.ID;
-                    this.Delay(item.Delay);
-                    this.ContentRaw(item.ContentRaw);
-                    this.ContentType(item.ContentType);
-                    this.Hit = item.Hit;
-                    this.UseTemplateEngine(item.UseTemplateEngine);
-                    this.CreateDate = item.CreateDate;
-                    this.ResponseID = item.ResponseID;
-                    this.IsEditing(false);
+                    _this.ID = item.ID;
+                    _this.Delay(item.Delay);
+                    _this.ContentRaw(item.ContentRaw);
+                    _this.ContentType(item.ContentType);
+                    _this.Hit = item.Hit;
+                    _this.UseTemplateEngine(item.UseTemplateEngine);
+                    _this.CreateDate = item.CreateDate;
+                    _this.ResponseID = item.ResponseID;
+                    _this.IsEditing(false);
                 }
+                return _this;
             }
             ResponseDetail.prototype.IsValid = function (showMessage) {
                 var self = this;
@@ -285,14 +309,13 @@ var Models;
         var AdminViewModel = (function (_super) {
             __extends(AdminViewModel, _super);
             function AdminViewModel() {
-                var _this = this;
-                _super.call(this);
-                this.AddNew = function () {
+                var _this = _super.call(this) || this;
+                _this.AddNew = function () {
                     var item = new Models.DTO.Response();
                     item.Category(_this.SelectedCategory());
                     _this.Items.unshift(item);
                 };
-                this.Delete = function (item, callBack) {
+                _this.Delete = function (item, callBack) {
                     var self = _this;
                     if (item.ID == 0)
                         self.Items.remove(item);
@@ -304,10 +327,10 @@ var Models;
                         });
                     }
                 };
-                this.Edit = function (item) {
+                _this.Edit = function (item) {
                     item.IsEditing(true);
                 };
-                this.Save = function (item, callBack) {
+                _this.Save = function (item, callBack) {
                     if (!item.IsValid(true))
                         return;
                     var self = item;
@@ -324,10 +347,10 @@ var Models;
                             callBack();
                     });
                 };
-                this.Cancel = function (item) {
+                _this.Cancel = function (item) {
                     _this.Reload(item);
                 };
-                this.Load = function () {
+                _this.Load = function () {
                     var self = _this;
                     self.InProgress(true);
                     $.getJSON("/Operation/GetResponseList", function (data) {
@@ -342,14 +365,14 @@ var Models;
                         self.InProgress(false);
                     });
                 };
-                this.AddNewDetail = function (parent) {
+                _this.AddNewDetail = function (parent) {
                     _this.LoadDetails(parent, function () {
                         var detail = new Models.DTO.ResponseDetail();
                         detail.ResponseID = parent.ID;
                         parent.Items.unshift(detail);
                     });
                 };
-                this.DeleteDetail = function (parent, item, callBack) {
+                _this.DeleteDetail = function (parent, item, callBack) {
                     var self = _this;
                     if (item.ID == 0)
                         parent.Items.remove(item);
@@ -360,10 +383,10 @@ var Models;
                         });
                     }
                 };
-                this.EditDetail = function (item) {
+                _this.EditDetail = function (item) {
                     item.IsEditing(true);
                 };
-                this.SaveDetail = function (item, callBack) {
+                _this.SaveDetail = function (item, callBack) {
                     if (!item.IsValid(true))
                         return;
                     var self = item;
@@ -380,10 +403,10 @@ var Models;
                             callBack();
                     });
                 };
-                this.CancelDetail = function (parent, item) {
+                _this.CancelDetail = function (parent, item) {
                     _this.ReloadDetail(parent, item);
                 };
-                this.LoadDetails = function (parent, callBack) {
+                _this.LoadDetails = function (parent, callBack) {
                     var self = parent;
                     self.InProgress(true);
                     $.getJSON("/Operation/GetResponseDetailListByParentID", { parentId: parent.ID }, function (data) {
@@ -399,7 +422,7 @@ var Models;
                             callBack();
                     });
                 };
-                this.Reload = function (item, callBack) {
+                _this.Reload = function (item, callBack) {
                     item.InProgress(true);
                     var self = _this;
                     if (item.ID == 0)
@@ -413,7 +436,7 @@ var Models;
                         });
                     }
                 };
-                this.ReloadDetail = function (parent, item, callBack) {
+                _this.ReloadDetail = function (parent, item, callBack) {
                     item.InProgress(true);
                     if (item.ID == 0)
                         _this.DeleteDetail(parent, item, callBack);
@@ -426,7 +449,7 @@ var Models;
                         });
                     }
                 };
-                this.SelectFile = function (item, file) {
+                _this.SelectFile = function (item, file) {
                     if (file != null) {
                         item.InProgress(true);
                         var FR = new FileReader();
@@ -441,10 +464,10 @@ var Models;
                         FR.readAsDataURL(file);
                     }
                 };
-                this.Items = ko.observableArray([]);
-                this.InProgress = ko.observable(false);
-                this.Categories = ko.computed({
-                    owner: this,
+                _this.Items = ko.observableArray([]);
+                _this.InProgress = ko.observable(false);
+                _this.Categories = ko.computed({
+                    owner: _this,
                     read: function () {
                         var returnList = [];
                         _this.Items().forEach(function (item) {
@@ -454,9 +477,9 @@ var Models;
                         return returnList;
                     }
                 });
-                this._SelectedCategory = ko.observable("");
-                this.SelectedCategory = ko.computed({
-                    owner: this,
+                _this._SelectedCategory = ko.observable("");
+                _this.SelectedCategory = ko.computed({
+                    owner: _this,
                     read: function () {
                         if (_this.Categories().indexOf(_this._SelectedCategory()) == -1) {
                             var result = _this.Categories()[0];
@@ -469,13 +492,14 @@ var Models;
                     write: function (value) {
                         _this._SelectedCategory(value);
                     }
-                }, this);
-                this.ShowLogDetail = function (item) {
+                }, _this);
+                _this.ShowLogDetail = function (item) {
                     $("#iframe-modal").attr("src", "/Admin/LogDetail?responseId=" + item.ID);
                     $("#iframe-loading").show();
                     $("#modal-global .modal-title").html("<b>Log Detail - </b> <code>" + item.UrlDisplay() + "</code>");
                     $("#modal-global").modal('toggle');
                 };
+                return _this;
             }
             return AdminViewModel;
         }(ViewModel.ViewModelBase));

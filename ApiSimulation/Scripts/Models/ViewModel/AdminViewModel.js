@@ -10,14 +10,13 @@ var Models;
         var AdminViewModel = (function (_super) {
             __extends(AdminViewModel, _super);
             function AdminViewModel() {
-                var _this = this;
-                _super.call(this);
-                this.AddNew = function () {
+                var _this = _super.call(this) || this;
+                _this.AddNew = function () {
                     var item = new Models.DTO.Response();
                     item.Category(_this.SelectedCategory());
                     _this.Items.unshift(item);
                 };
-                this.Delete = function (item, callBack) {
+                _this.Delete = function (item, callBack) {
                     var self = _this;
                     if (item.ID == 0)
                         self.Items.remove(item);
@@ -29,10 +28,10 @@ var Models;
                         });
                     }
                 };
-                this.Edit = function (item) {
+                _this.Edit = function (item) {
                     item.IsEditing(true);
                 };
-                this.Save = function (item, callBack) {
+                _this.Save = function (item, callBack) {
                     if (!item.IsValid(true))
                         return;
                     var self = item;
@@ -49,10 +48,10 @@ var Models;
                             callBack();
                     });
                 };
-                this.Cancel = function (item) {
+                _this.Cancel = function (item) {
                     _this.Reload(item);
                 };
-                this.Load = function () {
+                _this.Load = function () {
                     var self = _this;
                     self.InProgress(true);
                     $.getJSON("/Operation/GetResponseList", function (data) {
@@ -67,14 +66,14 @@ var Models;
                         self.InProgress(false);
                     });
                 };
-                this.AddNewDetail = function (parent) {
+                _this.AddNewDetail = function (parent) {
                     _this.LoadDetails(parent, function () {
                         var detail = new Models.DTO.ResponseDetail();
                         detail.ResponseID = parent.ID;
                         parent.Items.unshift(detail);
                     });
                 };
-                this.DeleteDetail = function (parent, item, callBack) {
+                _this.DeleteDetail = function (parent, item, callBack) {
                     var self = _this;
                     if (item.ID == 0)
                         parent.Items.remove(item);
@@ -85,10 +84,10 @@ var Models;
                         });
                     }
                 };
-                this.EditDetail = function (item) {
+                _this.EditDetail = function (item) {
                     item.IsEditing(true);
                 };
-                this.SaveDetail = function (item, callBack) {
+                _this.SaveDetail = function (item, callBack) {
                     if (!item.IsValid(true))
                         return;
                     var self = item;
@@ -105,10 +104,10 @@ var Models;
                             callBack();
                     });
                 };
-                this.CancelDetail = function (parent, item) {
+                _this.CancelDetail = function (parent, item) {
                     _this.ReloadDetail(parent, item);
                 };
-                this.LoadDetails = function (parent, callBack) {
+                _this.LoadDetails = function (parent, callBack) {
                     var self = parent;
                     self.InProgress(true);
                     $.getJSON("/Operation/GetResponseDetailListByParentID", { parentId: parent.ID }, function (data) {
@@ -124,7 +123,7 @@ var Models;
                             callBack();
                     });
                 };
-                this.Reload = function (item, callBack) {
+                _this.Reload = function (item, callBack) {
                     item.InProgress(true);
                     var self = _this;
                     if (item.ID == 0)
@@ -138,7 +137,7 @@ var Models;
                         });
                     }
                 };
-                this.ReloadDetail = function (parent, item, callBack) {
+                _this.ReloadDetail = function (parent, item, callBack) {
                     item.InProgress(true);
                     if (item.ID == 0)
                         _this.DeleteDetail(parent, item, callBack);
@@ -151,7 +150,7 @@ var Models;
                         });
                     }
                 };
-                this.SelectFile = function (item, file) {
+                _this.SelectFile = function (item, file) {
                     if (file != null) {
                         item.InProgress(true);
                         var FR = new FileReader();
@@ -166,10 +165,10 @@ var Models;
                         FR.readAsDataURL(file);
                     }
                 };
-                this.Items = ko.observableArray([]);
-                this.InProgress = ko.observable(false);
-                this.Categories = ko.computed({
-                    owner: this,
+                _this.Items = ko.observableArray([]);
+                _this.InProgress = ko.observable(false);
+                _this.Categories = ko.computed({
+                    owner: _this,
                     read: function () {
                         var returnList = [];
                         _this.Items().forEach(function (item) {
@@ -179,9 +178,9 @@ var Models;
                         return returnList;
                     }
                 });
-                this._SelectedCategory = ko.observable("");
-                this.SelectedCategory = ko.computed({
-                    owner: this,
+                _this._SelectedCategory = ko.observable("");
+                _this.SelectedCategory = ko.computed({
+                    owner: _this,
                     read: function () {
                         if (_this.Categories().indexOf(_this._SelectedCategory()) == -1) {
                             var result = _this.Categories()[0];
@@ -194,13 +193,14 @@ var Models;
                     write: function (value) {
                         _this._SelectedCategory(value);
                     }
-                }, this);
-                this.ShowLogDetail = function (item) {
+                }, _this);
+                _this.ShowLogDetail = function (item) {
                     $("#iframe-modal").attr("src", "/Admin/LogDetail?responseId=" + item.ID);
                     $("#iframe-loading").show();
                     $("#modal-global .modal-title").html("<b>Log Detail - </b> <code>" + item.UrlDisplay() + "</code>");
                     $("#modal-global").modal('toggle');
                 };
+                return _this;
             }
             return AdminViewModel;
         }(ViewModel.ViewModelBase));

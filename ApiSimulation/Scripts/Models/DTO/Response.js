@@ -10,25 +10,25 @@ var Models;
         var Response = (function (_super) {
             __extends(Response, _super);
             function Response(item) {
-                var _this = this;
-                _super.call(this, item);
-                this.ID = 0;
-                this.Url = ko.observable("");
-                this.Category = ko.observable("");
-                this.UrlDisplay = ko.computed(function () { return document.location.origin + '/' + _this.Url(); });
-                this.Hit = 0;
-                this.LastRequestDate = moment().format();
-                this.CreateDate = moment().format();
-                this.Items = ko.observableArray([]);
+                var _this = _super.call(this, item) || this;
+                _this.ID = 0;
+                _this.Url = ko.observable("");
+                _this.Category = ko.observable("");
+                _this.UrlDisplay = ko.computed(function () { return document.location.origin + '/' + _this.Url(); });
+                _this.Hit = 0;
+                _this.LastRequestDate = moment().format();
+                _this.CreateDate = moment().format();
+                _this.Items = ko.observableArray([]);
                 if (item != null) {
-                    this.ID = item.ID;
-                    this.Hit = item.Hit;
-                    this.Url(item.Url);
-                    this.Category(item.Category);
-                    this.LastRequestDate = item.LastRequestDate;
-                    this.CreateDate = item.CreateDate;
-                    this.IsEditing(false);
+                    _this.ID = item.ID;
+                    _this.Hit = item.Hit;
+                    _this.Url(item.Url);
+                    _this.Category(item.Category);
+                    _this.LastRequestDate = item.LastRequestDate;
+                    _this.CreateDate = item.CreateDate;
+                    _this.IsEditing(false);
                 }
+                return _this;
             }
             Response.prototype.IsValid = function (showMessage) {
                 var self = this;

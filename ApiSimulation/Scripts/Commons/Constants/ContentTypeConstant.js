@@ -5,9 +5,9 @@ var Commons;
         var ContentTypeConstant = (function () {
             function ContentTypeConstant() {
             }
-            ContentTypeConstant.AllowedContentTypes = ["application/json", "application/xml", "text/html", "text/plain", "text/csv", "image/png", "image/jpeg", "application/pdf", "video/mp4"];
             return ContentTypeConstant;
         }());
+        ContentTypeConstant.AllowedContentTypes = ["application/json", "application/xml", "text/html", "text/plain", "text/csv", "image/png", "image/jpeg", "application/pdf", "video/mp4"];
         Constants.ContentTypeConstant = ContentTypeConstant;
     })(Constants = Commons.Constants || (Commons.Constants = {}));
 })(Commons || (Commons = {}));

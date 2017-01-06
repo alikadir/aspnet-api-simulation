@@ -5,17 +5,17 @@ var Commons;
         var ObservebleHelper = (function () {
             function ObservebleHelper() {
             }
-            ObservebleHelper.ObservableToClassicObject = function (observableObj) {
-                return ko.viewmodel.toModel(observableObj);
-            };
-            ObservebleHelper.ClassicObjectToObservable = function (classicObj) {
-                return ko.viewmodel.fromModel(classicObj);
-            };
-            ObservebleHelper.UpdateObserveble = function (observableObj, classicObj) {
-                ko.viewmodel.updateFromModel(observableObj, classicObj);
-            };
             return ObservebleHelper;
         }());
+        ObservebleHelper.ObservableToClassicObject = function (observableObj) {
+            return ko.viewmodel.toModel(observableObj);
+        };
+        ObservebleHelper.ClassicObjectToObservable = function (classicObj) {
+            return ko.viewmodel.fromModel(classicObj);
+        };
+        ObservebleHelper.UpdateObserveble = function (observableObj, classicObj) {
+            ko.viewmodel.updateFromModel(observableObj, classicObj);
+        };
         Helpers.ObservebleHelper = ObservebleHelper;
     })(Helpers = Commons.Helpers || (Commons.Helpers = {}));
 })(Commons || (Commons = {}));
