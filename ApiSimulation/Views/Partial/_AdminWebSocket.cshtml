@@ -1,0 +1,38 @@
+﻿<section id="web-socket">
+
+    <div class="page-header">
+        <h1>
+            WebSocket <small>
+                <span>Detaylı bağlantı işlemleri</span>
+            </small>
+        </h1>
+    </div>
+    <div>
+        <h3>Bağlantı</h3>
+        <p>
+            Websocket'e bağlantı kurmak için <code>ws://apisimulator.pho.fm/WebSocket/Init</code> adres kullanılır. SSL bağlantısı için <code>wss://</code> protokolü kullanılabilir.
+        </p>
+    </div>
+    <br />
+    <div>
+        <h3>Api Mesaj Gönderimi</h3>
+        <p>
+            Websocket bağlantısı olmadan api/http yardımı ile mesaj gönderebilmek için <code>http://apisimulator.pho.fm/WebSocket/Send?message=...</code> adresi kullanılabilir. 
+            Bu operasyon backend'de bir websocket bağantısı kurup gönderilen mesajı bir client olarak websocket'e iletir.
+        </p>
+    </div>
+    <br />
+    <div>
+        <h3>Javascript Client</h3>
+        <p>
+            Javascript üzerinden bir client oluşturmak için <code>WebSocket</code> nesnesi kullanılır.
+        </p>
+<pre>
+var socket = new WebSocket("ws://apisimulator.pho.fm/WebSocket/Init");
+socket.onmessage = function (evt) { console.log(evt.data); };
+    
+socket.send("test message");
+</pre>
+    </div>
+
+</section>

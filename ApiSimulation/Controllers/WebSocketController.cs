@@ -14,17 +14,6 @@ using System.Web.WebSockets;
 namespace ApiSimulation.Controllers
 {
 
-    /*
-   
-    JAVASCRIPT CLIENT 
-    
-     
-    var socket = new WebSocket("ws://localhost:61848/WebSocket/Init");
-    socket.onmessage = function (evt) { console.log(evt.data); };
-    
-    socket.send("test message");
-         
-   */
 
 
     public class WebSocketController : Controller

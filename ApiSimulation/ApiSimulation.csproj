@@ -328,6 +328,7 @@
     <Content Include="Views\Admin\LogDetail.cshtml" />
     <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
     <Content Include="Views\Admin\NotificationList.cshtml" />
+    <Content Include="Views\Partial\_AdminWebSocket.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
