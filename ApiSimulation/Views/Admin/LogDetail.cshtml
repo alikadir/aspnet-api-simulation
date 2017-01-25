@@ -5,27 +5,40 @@
     <title>Request Log Detail</title>
 
     <script>
-            window.onload = function ()
+        var tick = 3000;
+
+        window.onload = function ()
             {
                 @if(ViewBag.Reload)
                 {
                     <text>
-                       setTimeout(function () { window.location.reload(false); }, 3000);
+                    timerCounter();
+                    setTimeout(function () { window.location.reload(false); }, tick);
                     </text>
                 }
-            }
+        }
 
-            function onChange()
+        function timerCounter()
+        {
+            setTimeout(function ()
             {
-                window.location.href = "?responseId=@(ViewBag.ResponseId)&reload=@(!ViewBag.Reload)";
-            }
+                document.getElementById('timer-viewer').innerText = Math.round(tick / 1000);
+                tick = tick - 100;
+                timerCounter();
+            }, 100);                       
+        }
+
+        function refreshStatusChange()
+        {
+            window.location.href = "?responseId=@(ViewBag.ResponseId)&reload=@(!ViewBag.Reload)";
+        }
 
     </script>
 </head>
 <body style="font-family:Arial, Helvetica, sans-serif">
     <label>
-        <input type="checkbox" id="cbx-live" onchange="onChange()" @(ViewBag.Reload ? "checked='checked'" : "") />
-        Canlı
+        <input type="checkbox" id="cbx-live" onchange="refreshStatusChange()" @(ViewBag.Reload ? "checked='checked'" : "") />
+        Canlı <span style="color:red" id="timer-viewer"></span>
     </label>
     <hr />
 
