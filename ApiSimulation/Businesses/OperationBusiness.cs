@@ -204,7 +204,7 @@ namespace ApiSimulation.Businesses
                 {
                     RequestDate = DateTime.Now,
                     RequestIP = HttpContext.Current.Request.UserHostAddress,
-                    RequestUserAgent = HttpContext.Current.Request.UserAgent,
+                    RequestUserAgent = HttpContext.Current.Request.UserAgent ?? string.Empty,
                     RequestMethod = HttpContext.Current.Request.HttpMethod,
                     RequestHeader = HttpUtility.UrlDecode(HttpContext.Current.Request.Headers.ToString()),
                     RequestRaw = HttpUtility.UrlDecode(stream.ReadToEnd())

@@ -20,6 +20,10 @@
             Websocket bağlantısı olmadan api/http yardımı ile mesaj gönderebilmek için <code>http://apisimulator.pho.fm/WebSocket/Send?message=...</code> adresi kullanılabilir. 
             Bu operasyon backend'de bir websocket bağantısı kurup gönderilen mesajı bir client olarak websocket'e iletir.
         </p>
+        <p>
+            Herhangi bir URL den dönen sonucu client'lara iletmek için ise <code>http://apisimulator.pho.fm/WebSocket/Send?message=[URL]</code> şeklinde kullanılabilir.
+            "message" parametresinin değeri eğer bir URL ise bu URL'in cevabını mesaj olarak websocket client'lerine iletir.
+        </p>
     </div>
     <br />
     <div>

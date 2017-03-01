@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebSockets;
+using System.Net;
 
 namespace ApiSimulation.Controllers
 {
@@ -33,10 +34,23 @@ namespace ApiSimulation.Controllers
         public async Task<ActionResult> Send(string message)
         {
 
+            if (message.IndexOf("http", 0, 5) != -1) // bir url den istekde bulunup sonucunu mesaj olarak ilet.
+            {
+                using (var wc = new WebClient())
+                {
+                    try
+                    {
+                        message = wc.DownloadString(message);
+                    }
+                    catch { }
+                }
+            }
+
+
             using (var ws = new ClientWebSocket())
             {
                 Uri serverUri = new Uri("ws://apisimulator.pho.fm/WebSocket/Init"); // bu Url çalışan servisin url'i ile değiştirilecek!
-
+                
                 await ws.ConnectAsync(serverUri, CancellationToken.None);
                 var bytesToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
                 await ws.SendAsync(bytesToSend, WebSocketMessageType.Text, true, CancellationToken.None);         
