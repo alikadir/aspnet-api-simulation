@@ -11,6 +11,8 @@ namespace ApiSimulation
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.Add("Default", new Route("{controller}/{action}/{id}", new DynamicRouteHandler())

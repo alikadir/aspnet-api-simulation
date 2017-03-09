@@ -76,8 +76,13 @@ namespace ApiSimulation.Controllers
         #endregion
 
         #region Other
+
+     
         public ActionResult DynamicResponse()
         {
+
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
             var response = new Businesses.OperationBusiness().GetResponseContent(Constants.UrlConstant.ApiDynamicUrl);
 
             if (response == null)
