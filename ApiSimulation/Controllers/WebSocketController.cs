@@ -34,7 +34,7 @@ namespace ApiSimulation.Controllers
         public async Task<ActionResult> Send(string message)
         {
 
-            if (message.IndexOf("http", 0, 5) != -1) // bir url den istekde bulunup sonucunu mesaj olarak ilet.
+            if (message.Length > 5 && message.IndexOf("http", 0, 5) != -1) // bir url den istekde bulunup sonucunu mesaj olarak ilet.
             {
                 using (var wc = new WebClient())
                 {
@@ -50,14 +50,14 @@ namespace ApiSimulation.Controllers
             using (var ws = new ClientWebSocket())
             {
                 Uri serverUri = new Uri("ws://apisimulator.pho.fm/WebSocket/Init"); // bu Url çalışan servisin url'i ile değiştirilecek!
-                
+
                 await ws.ConnectAsync(serverUri, CancellationToken.None);
                 var bytesToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
-                await ws.SendAsync(bytesToSend, WebSocketMessageType.Text, true, CancellationToken.None);         
+                await ws.SendAsync(bytesToSend, WebSocketMessageType.Text, true, CancellationToken.None);
                 await Task.Delay(100);
 
             }
-           return new EmptyResult();
+            return new EmptyResult();
         }
 
     }

@@ -81,7 +81,7 @@ namespace ApiSimulation.Controllers
         public ActionResult DynamicResponse()
         {
 
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            Response.Headers.Add("Access-Control-Allow-Origin", "*"); // cross domain için eklendi. 
 
             var response = new Businesses.OperationBusiness().GetResponseContent(Constants.UrlConstant.ApiDynamicUrl);
 
