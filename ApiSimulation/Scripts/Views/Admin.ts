@@ -19,3 +19,17 @@ function PushNotification()
     $("#modal-global").modal('toggle');
 }
 
+function TextAreaChangeSize(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight) + "px";
+}
+
+function AllTextAreaSizeFix()
+{
+    setTimeout(function () {
+        $("textarea").each(function (indx, element) {
+            TextAreaChangeSize(element);
+        });
+    }, 500);
+    
+}

@@ -86,6 +86,7 @@ var Models;
                 };
                 _this.EditDetail = function (item) {
                     item.IsEditing(true);
+                    AllTextAreaSizeFix();
                 };
                 _this.SaveDetail = function (item, callBack) {
                     if (!item.IsValid(true))

@@ -117,6 +117,7 @@
         EditDetail = (item: DTO.ResponseDetail): void =>
         {
             item.IsEditing(true);
+            AllTextAreaSizeFix();
         }
         SaveDetail = (item: DTO.ResponseDetail, callBack?: () => void): void =>
         {

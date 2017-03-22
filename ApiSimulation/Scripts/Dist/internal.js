@@ -385,6 +385,7 @@ var Models;
                 };
                 _this.EditDetail = function (item) {
                     item.IsEditing(true);
+                    AllTextAreaSizeFix();
                 };
                 _this.SaveDetail = function (item, callBack) {
                     if (!item.IsValid(true))
@@ -519,5 +520,16 @@ function PushNotification() {
     $("#iframe-loading").show();
     $("#modal-global .modal-title").html("<b>Push Notification</b>");
     $("#modal-global").modal('toggle');
+}
+function TextAreaChangeSize(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight) + "px";
+}
+function AllTextAreaSizeFix() {
+    setTimeout(function () {
+        $("textarea").each(function (indx, element) {
+            TextAreaChangeSize(element);
+        });
+    }, 500);
 }
 //# sourceMappingURL=Admin.js.map
