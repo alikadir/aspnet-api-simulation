@@ -31,7 +31,7 @@ function WebSocketActiveConnections() {
             // $("#ws-active-connections").add(li);
             $("#ws-active-connections").append("<li><code>" + obj.IP + "</code> - " + obj.UserAgent + "</li>");
         });
-        setTimeout(WebSocketActiveConnections, 1000);
+        setTimeout(WebSocketActiveConnections, 3000);
     });
 }
 //# sourceMappingURL=Admin.js.map
