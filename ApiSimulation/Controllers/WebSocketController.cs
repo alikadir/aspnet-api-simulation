@@ -20,9 +20,6 @@ namespace ApiSimulation.Controllers
     public class WebSocketController : Controller
     {
 
-        private static WebSocketCollection clients = new WebSocketCollection();
-
-
         public ActionResult Init()
         {
             if (HttpContext.IsWebSocketRequest)
@@ -45,8 +42,7 @@ namespace ApiSimulation.Controllers
                     catch { }
                 }
             }
-
-
+            
             using (var ws = new ClientWebSocket())
             {
                 Uri serverUri = new Uri("ws://apisimulator.pho.fm/WebSocket/Init"); // bu Url çalışan servisin url'i ile değiştirilecek!
@@ -60,12 +56,17 @@ namespace ApiSimulation.Controllers
             return new EmptyResult();
         }
 
+        public ActionResult GetClientList()
+        {
+            return Json(CustomWebSocketHandler.clients.Select(x => new { IP = x.WebSocketContext.UserHostAddress, UserAgent = x.WebSocketContext.UserAgent }), JsonRequestBehavior.AllowGet);
+        }
+
     }
 
 
     public class CustomWebSocketHandler : WebSocketHandler
     {
-        private static WebSocketCollection clients = new WebSocketCollection();
+        public static WebSocketCollection clients = new WebSocketCollection();
 
         public override void OnOpen()
         {

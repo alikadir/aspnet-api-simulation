@@ -5,6 +5,7 @@ $(function ()
 {
     viewModel.Load();
     ko.applyBindings(viewModel);
+    WebSocketActiveConnections();
 
     $("#btn-new-operation").click(() => viewModel.AddNew());
     $("#iframe-modal").on("load", () => { $("#iframe-loading").hide(); });
@@ -32,4 +33,23 @@ function AllTextAreaSizeFix()
         });
     }, 500);
     
+}
+
+function WebSocketActiveConnections()
+{
+
+    $.getJSON("/WebSocket/GetClientList", function (data) {
+
+        $("#ws-active-connections").empty();
+
+        $.each(data, function (indx, obj) {
+           // var li = $("li").html("<code>" + obj.IP + "</code> - " + obj.UserAgent);
+           // $("#ws-active-connections").add(li);
+            $("#ws-active-connections").append("<li><code>" + obj.IP + "</code> - " + obj.UserAgent + "</li>");
+        });
+
+        setTimeout(WebSocketActiveConnections, 1000);
+
+    });
+
 }
