@@ -22,7 +22,28 @@ var Commons;
             }
             return ContentTypeConstant;
         }());
-        ContentTypeConstant.AllowedContentTypes = ["application/json", "application/xml", "text/html", "text/plain", "text/csv", "image/png", "image/jpeg", "application/pdf", "video/mp4"];
+        ContentTypeConstant.AllowedContentTypes = [
+            "application/json",
+            "application/xml",
+            "application/zip",
+            "application/pdf",
+            "application/octet-stream",
+            "application/x-font-woff",
+            "application/x-font-ttf",
+            "application/x-font-otf",
+            "application/vnd.ms-excel",
+            "text/html",
+            "text/plain",
+            "text/csv",
+            "text/css",
+            "image/png",
+            "image/jpeg",
+            "image/gif",
+            "video/mp4",
+            "video/mpeg",
+            "audio/mpeg",
+            "audio/mp3"
+        ];
         Constants.ContentTypeConstant = ContentTypeConstant;
     })(Constants = Commons.Constants || (Commons.Constants = {}));
 })(Commons || (Commons = {}));
@@ -537,8 +558,6 @@ function WebSocketActiveConnections() {
     $.getJSON("/WebSocket/GetClientList", function (data) {
         $("#ws-active-connections").empty();
         $.each(data, function (indx, obj) {
-            // var li = $("li").html("<code>" + obj.IP + "</code> - " + obj.UserAgent);
-            // $("#ws-active-connections").add(li);
             $("#ws-active-connections").append("<li><code>" + obj.IP + "</code> - " + obj.UserAgent + "</li>");
         });
         setTimeout(WebSocketActiveConnections, 3000);
